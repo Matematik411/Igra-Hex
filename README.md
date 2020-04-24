@@ -2,3 +2,4 @@
 Igra Hex
 
 Delo na projektu
+test
