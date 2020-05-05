@@ -150,10 +150,10 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		if (t != null) {
 			g2.setColor(new Color(255, 215, 0));
 			for (Tocka P : t) {
-				System.out.println(P.koordinati);
-//				int j = P.koordinati.y;
-//				int[][] sestkotnik = sestkotnik(i, j);
-//				g2.fillPolygon(sestkotnik[0], sestkotnik[1], 6);
+				int i = P.koordinati.getX();
+				int j = P.koordinati.getY();
+				int[][] sestkotnik = sestkotnik(i, j);
+				g2.fillPolygon(sestkotnik[0], sestkotnik[1], 6);
 			}
 		}
 		
