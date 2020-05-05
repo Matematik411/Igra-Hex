@@ -36,7 +36,7 @@ public class Igra {
 		this.plosca = new Tocka[N][N];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				plosca[i][j] = new Tocka(new Koordinati(i, j));
+				plosca[i][j] = new Tocka(new Koordinati(j, i));
 			}
 		}
 		this.naPotezi = Igralec.Rdeè;
@@ -50,7 +50,7 @@ public class Igra {
 		this.plosca = new Tocka[M][M];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				plosca[i][j] = new Tocka(new Koordinati(i, j));
+				plosca[i][j] = new Tocka(new Koordinati(j, i));
 			}
 		}
 		this.naPotezi = Igralec.Rdeè;
@@ -71,7 +71,7 @@ public class Igra {
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				if (this.plosca[i][j].polje == Polje.PRAZNO) {
-					seznam.add(new Koordinati(i, j));
+					seznam.add(new Koordinati(j, i));
 				}
 			}
 		}
@@ -93,34 +93,34 @@ public class Igra {
 	public boolean odigraj(Koordinati p) {	
 		int x = p.getX();
 		int y = p.getY();
-		Tocka glavna = this.plosca[x][y];
+		Tocka glavna = this.plosca[y][x];
 		Polje barva = this.naPotezi.getPolje();
 		if (glavna.polje == Polje.PRAZNO) {
 			glavna.polje = barva;
 			if (barva == Polje.Rdeè) this.rdece.add(glavna);
 			if (barva == Polje.Moder) this.modre.add(glavna);
 			try {
-				Tocka tocka1 = this.plosca[x][y - 1];
+				Tocka tocka1 = this.plosca[y - 1][x];
 				dodaj_povezavo(tocka1, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			try {
-				Tocka tocka2 = this.plosca[x][y + 1];
+				Tocka tocka2 = this.plosca[y + 1][x];
 				dodaj_povezavo(tocka2, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			try {
-				Tocka tocka3 = this.plosca[x - 1][y];
+				Tocka tocka3 = this.plosca[y][x - 1];
 				dodaj_povezavo(tocka3, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			try {
-				Tocka tocka4 = this.plosca[x - 1][y + 1];
+				Tocka tocka4 = this.plosca[y + 1][x - 1];
 				dodaj_povezavo(tocka4, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			try {
-				Tocka tocka5 = this.plosca[x + 1][y - 1];
+				Tocka tocka5 = this.plosca[y - 1][x + 1];
 				dodaj_povezavo(tocka5, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			try {
-				Tocka tocka6 = this.plosca[x + 1][y];
+				Tocka tocka6 = this.plosca[y][x + 1];
 				dodaj_povezavo(tocka6, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			
@@ -149,16 +149,16 @@ public class Igra {
 		zacetek.videna = true;
 		zacetek.predhodnji.add(zacetek);
 		for (Tocka sosed : zacetek.sosedje) {
-			if(sosed!=null && sosed.videna) {
+			if(sosed!=null && !sosed.videna) {
 				sosed.predhodnji = zacetek.predhodnji;
 				sosed.predhodnji.add(sosed);
 				if (sosed.polje == Polje.Rdeè) {
-					if (sosed.koordinati.getY() == N) {
+					if (sosed.koordinati.getY() == N - 1) {
 						this.konec = sosed.predhodnji;
 					}
 				}
 				if (sosed.polje == Polje.Moder) {
-					if (sosed.koordinati.getX() == N) {
+					if (sosed.koordinati.getX() == N - 1) {
 						this.konec = sosed.predhodnji;
 					}
 				}
@@ -170,16 +170,25 @@ public class Igra {
 	
 	
 	public Stanje stanje() {
-		this.pocisti();
 		for (int i = 0; i < N; i++) {
+			this.pocisti();
 			Tocka tocka = this.plosca[0][i];
-			DFS(tocka);
-			if (this.konec.size() > 0) return Stanje.ZMAGA_RDEÈ;
+			if (tocka.polje == Polje.Rdeè) {
+				DFS(tocka);
+			}
+			if (this.konec.size() > 0) {
+				return Stanje.ZMAGA_RDEÈ;
+			}
 		}
 		for (int i = 0; i < N; i++) {
+			this.pocisti();
 			Tocka tocka = this.plosca[i][0];
-			DFS(tocka);
-			if (this.konec.size() > 0) return Stanje.ZMAGA_MODER;
+			if (tocka.polje == Polje.Moder) {
+				DFS(tocka);
+			}
+			if (this.konec.size() > 0) {
+				return Stanje.ZMAGA_MODER;		
+			}
 		}
 		return Stanje.V_TEKU;
 	}
