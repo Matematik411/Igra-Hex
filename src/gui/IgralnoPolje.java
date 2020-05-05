@@ -44,7 +44,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(700, 500);
+		return new Dimension(750, 500);
 	}
 
 	
@@ -63,15 +63,15 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	private void narisiZeton(Graphics2D g2, int i, int j, Igralec p) {
 		// premer zetona
 		double d = 2 * a * (1.0 - LINE_WIDTH - 2.0 * PADDING);
+		
 		// sredisce
 		int xSred = (int) (ws + (2 * i + j + 1) * k);
 		int ySred = (int) (ws + (1.5 * j + 1) * a);
 		double x = xSred - d * 0.5;
 		double y = ySred - d * 0.5;
+		
 		if (p == Igralec.Rdeè) g2.setColor(Color.RED);
 		else g2.setColor(Color.BLUE);
-		
-		//g2.setStroke(new BasicStroke((float) (a * LINE_WIDTH)));
 		g2.fillOval((int)x, (int)y, (int)d , (int)d);
 	}
 	
@@ -159,6 +159,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		
 		// crte
 		// najprej robne, ki so posebnih barv in krepke
+		// modre
 		g2.setColor(Color.BLUE);
 		g2.setStroke(new BasicStroke((float) (3 * a * LINE_WIDTH)));
 		int[][] crta = navpicnaCrta(0, Igra.N);
@@ -169,6 +170,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.drawLine((int) (k * (Igra.N - 1) + ws), (int) (Igra.N * 1.5 * a + ws),
 				(int) (k * Igra.N + ws), (int) (a * (1.5 * Igra.N + 0.5) + ws));
 		
+		// rdece
 		g2.setColor(Color.RED);
 		g2.setStroke(new BasicStroke((float) (3 * a * LINE_WIDTH)));
 		crta = vodoravnaCrta(0, Igra.N);
@@ -179,6 +181,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.drawLine((int) ((2 * Igra.N - 1) * k + ws), (int) ws, 
 				(int) (2 * Igra.N * k + ws), (int) (a * 0.5 + ws));
 		
+		// vmesne crte - crne
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke((float) (a * LINE_WIDTH)));
 		for (int i = 1; i < Igra.N; i++) {
@@ -225,7 +228,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 				double d = Math.abs(k * (2 * i + 1 + j) - x);
 				if (0 <= i && i < Igra.N && 0 <= j && j < Igra.N &&
 						(k - d) > (a *LINE_WIDTH * 0.5)) {
-					Vodja.clovekovaPoteza (new Koordinati(i, j));
+					Vodja.clovekovaPoteza(new Koordinati(i, j));
 				}
 			}
 			

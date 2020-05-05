@@ -32,7 +32,6 @@ public class Igra {
 	
 	// Konstruktor za igro 11x11
 	public Igra() {
-		N = 11;
 		this.plosca = new Tocka[N][N];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -48,8 +47,8 @@ public class Igra {
 	// Konstruktor za igro NxN
 	public Igra(int M) {
 		this.plosca = new Tocka[M][M];
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
+		for (int i = 0; i < M; i++) {
+			for (int j = 0; j < M; j++) {
 				plosca[i][j] = new Tocka(new Koordinati(j, i));
 			}
 		}

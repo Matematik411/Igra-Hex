@@ -15,22 +15,14 @@ import javax.swing.JMenuItem;
 
 import vodja.Vodja;
 import vodja.Vodja.VrstaIgralca;
+import logika.Igra;
 import logika.Igralec;
 
 
-
-/**
- * Glavno okno aplikacije hrani trenutno stanje igre in nadzoruje potek
- * igre.
- * 
- * @author AS
- *
- */
 @SuppressWarnings("serial")
 public class GlavnoOkno extends JFrame implements ActionListener {
-	/**
-	 * JPanel, v katerega igramo
-	 */
+	
+	// polje, kjer igramo igro
 	private IgralnoPolje polje;
 
 	
@@ -44,11 +36,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private JMenuItem igraRacunalnikRacunalnik;
 	private JMenuItem imeRdecega;
 	private JMenuItem imeModrega;
-	private JMenuItem velikostIgre;
+	private JMenuItem v5, v6, v7, v8, v9, v10, v11, v12, v13;
 
-	/**
-	 * Ustvari novo glavno okno in pricni igrati igro.
-	 */
+	// ustvari igro
 	public GlavnoOkno() {
 		
 		this.setTitle("Igra hex");
@@ -89,9 +79,36 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		nastavitve.add(imeModrega);
 		imeModrega.addActionListener(this);
 		
-		velikostIgre = new JMenuItem("Nastavi velikost igralne mreze");
+		JMenu velikostIgre = new JMenu("Nastavi velikost igralne mreze");
 		nastavitve.add(velikostIgre);
-		velikostIgre.addActionListener(this);
+		
+		v5 = new JMenuItem("5");
+		velikostIgre.add(v5);
+		v5.addActionListener(this);
+		v6 = new JMenuItem("6");
+		velikostIgre.add(v6);
+		v6.addActionListener(this);
+		v7 = new JMenuItem("7");
+		velikostIgre.add(v7);
+		v7.addActionListener(this);
+		v8 = new JMenuItem("8");
+		velikostIgre.add(v8);
+		v8.addActionListener(this);
+		v9 = new JMenuItem("9");
+		velikostIgre.add(v9);
+		v9.addActionListener(this);
+		v10 = new JMenuItem("10");
+		velikostIgre.add(v10);
+		v10.addActionListener(this);
+		v11 = new JMenuItem("11");
+		velikostIgre.add(v11);
+		v11.addActionListener(this);
+		v12 = new JMenuItem("12");
+		velikostIgre.add(v12);
+		v12.addActionListener(this);
+		v13 = new JMenuItem("13");
+		velikostIgre.add(v13);
+		v13.addActionListener(this);
 
 		// igralno polje
 		polje = new IgralnoPolje();
@@ -142,6 +159,28 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			Vodja.vrstaIgralca.put(Igralec.Rdeè, VrstaIgralca.Raèunalnik); 
 			Vodja.vrstaIgralca.put(Igralec.Moder, VrstaIgralca.Raèunalnik);
 			Vodja.igramoNovoIgro();
+		} else {
+			if (e.getSource() == v5) {
+				Igra.N = 5;
+			} else if (e.getSource() == v6) {
+				Igra.N = 6;
+			} else if (e.getSource() == v7) {
+				Igra.N = 7;
+			} else if (e.getSource() == v8) {
+				Igra.N = 8;
+			} else if (e.getSource() == v9) {
+				Igra.N = 9;
+			} else if (e.getSource() == v10) {
+				Igra.N = 10;
+			} else if (e.getSource() == v11) {
+				Igra.N = 11;
+			} else if (e.getSource() == v12) {
+				Igra.N = 12;
+			} else if (e.getSource() == v13) {
+				Igra.N = 13;
+			}
+			Vodja.igra = null;
+			osveziGUI();
 		}
 	}
 	

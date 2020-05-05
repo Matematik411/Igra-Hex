@@ -23,8 +23,13 @@ public class Vodja {
 	public static Map<Igralec,VrstaIgralca> vrstaIgralca;
 	
 	public static void igramoNovoIgro () {
-		igra = new Igra ();
-		igramo ();
+		igra = new Igra();
+		igramo();
+	}
+	
+	public static void igramoNovoIgro(int n) {
+		igra = new Igra(n);
+		igramo();
 	}
 	
 	
@@ -63,7 +68,7 @@ public class Vodja {
 	
 	public static void clovekovaPoteza(Koordinati poteza) {
 		if (igra.odigraj(poteza)) clovekNaVrsti = false;
-		igramo ();
+		igramo();
 	}
 	
 }
