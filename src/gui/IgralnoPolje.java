@@ -68,7 +68,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		int ySred = (int) (ws + (1.5 * j + 1) * a);
 		double x = xSred - d * 0.5;
 		double y = ySred - d * 0.5;
-		if (p == Igralec.Rdeè) g2.setColor(Color.RED);
+		if (p == Igralec.Rdeè) g2.setColor(Color.GREEN);
 		else g2.setColor(Color.BLUE);
 		
 		//g2.setStroke(new BasicStroke((float) (a * LINE_WIDTH)));
