@@ -14,7 +14,7 @@ import koordinati.Koordinati;
 public class Igra {
 	
 	// Standardna velikost igralne plošèe je 11x11
-	public static int N = 11;
+	public static int N = 7;
 	
 	// Zmagovalna èrta
 	public Set<Tocka> konec;
@@ -59,10 +59,33 @@ public class Igra {
 		this.modre = new HashSet<Tocka>();
 	}
 	
+	// Konstruktor za kopijo igre igra
+	public Igra(Igra igra) {
+		this.plosca = new Tocka[N][N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati);
+				this.plosca[i][j].polje = igra.plosca[i][j].polje;
+				this.plosca[i][j].sosedje = new HashSet<Tocka>(igra.plosca[i][j].sosedje);
+			}
+		}
+		this.naPotezi = igra.naPotezi();
+		this.konec = new HashSet<Tocka>();
+		this.rdece = new HashSet<Tocka>();
+		this.modre = new HashSet<Tocka>();
+	}
+	
+	
 	// Vrne igralno plošèo
 	public Tocka[][] getPlosca () {
 		return this.plosca;
 	}
+	
+	// Vrne igralca
+	public Igralec naPotezi() {
+		return this.naPotezi;
+	}
+	
 	
 	// Vrne seznam možnih potez
 	public List<Koordinati> poteze() {
@@ -193,7 +216,10 @@ public class Igra {
 	}
 	
 		
-		
+	@Override
+	public String toString() {
+		return this.plosca[0][0].polje.toString();
+	}
 		
 		
 		

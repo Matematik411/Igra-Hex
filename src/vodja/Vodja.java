@@ -2,8 +2,14 @@ package vodja;
 
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.SwingWorker;
 
 import gui.GlavnoOkno;
+import inteligenca.Inteligenca;
+import inteligenca.Minimax;
+import inteligenca.RandomMinimax;
 
 import java.util.Map;
 import java.util.List;
@@ -55,14 +61,40 @@ public class Vodja {
 		}
 	}
 	
-	private static Random random = new Random ();
+//	private static Random random = new Random ();
+//	
+//	public static void racunalnikovaPoteza() {
+//		List<Koordinati> moznePoteze = igra.poteze();
+//		int randomIndex = random.nextInt(moznePoteze.size());
+//		Koordinati poteza = moznePoteze.get(randomIndex);
+//		igra.odigraj(poteza);
+//		igramo();	
+//	}
+
+	
+	public static Inteligenca racunalnikovaInteligenca = new Minimax(2);
 	
 	public static void racunalnikovaPoteza() {
-		List<Koordinati> moznePoteze = igra.poteze();
-		int randomIndex = random.nextInt(moznePoteze.size());
-		Koordinati poteza = moznePoteze.get(randomIndex);
-		igra.odigraj(poteza);
-		igramo();	
+		Igra zacetnaIgra = igra;
+		SwingWorker<Koordinati, Void> worker = 
+				new SwingWorker<Koordinati, Void> () {
+			@Override
+			protected Koordinati doInBackground() {
+				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
+				try {TimeUnit.SECONDS.sleep(2);} catch (Exception e) {};
+				return poteza;
+			}
+			@Override
+			protected void done () {
+				Koordinati poteza = null;
+				try {poteza = get();} catch (Exception e) {};
+				if (igra == zacetnaIgra) {
+					igra.odigraj(poteza);
+					igramo ();
+				}
+			}
+		};
+		worker.execute();
 	}
 	
 	
