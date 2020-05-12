@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import logika.Igra;
-
-import koordinati.Koordinati;
-
-
+import splosno.Koordinati;
 import inteligenca.NajboljseOcenjenePoteze;
 
 public class RandomMinimax extends Inteligenca {

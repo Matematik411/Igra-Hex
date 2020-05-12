@@ -3,7 +3,7 @@ package logika;
 import java.util.HashSet;
 import java.util.Set;
 
-import koordinati.Koordinati;
+import splosno.Koordinati;
 
 
 

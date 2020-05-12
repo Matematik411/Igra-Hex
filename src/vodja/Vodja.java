@@ -16,7 +16,7 @@ import java.util.List;
 
 import logika.Igra;
 import logika.Igralec;
-import koordinati.Koordinati;
+import splosno.Koordinati;
 
 public class Vodja {
 	

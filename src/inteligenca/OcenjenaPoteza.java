@@ -1,6 +1,6 @@
 package inteligenca;
 
-import koordinati.Koordinati;
+import splosno.Koordinati;
 
 public class OcenjenaPoteza {
 	

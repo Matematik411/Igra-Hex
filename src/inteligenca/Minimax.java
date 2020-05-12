@@ -4,9 +4,7 @@ import java.util.List;
 
 import logika.Igra;
 //import logika.Igralec;
-import logika.Igralec;
-import koordinati.Koordinati;
-
+import splosno.Koordinati;
 import inteligenca.OceniPozicijo;
 
 public class Minimax extends Inteligenca {
@@ -28,32 +26,36 @@ public class Minimax extends Inteligenca {
 		return najboljsaPoteza.poteza;	
 	}
 	
-	// vrne najboljso ocenjeno potezo z vidike igralca jaz
+	// vrne najboljso ocenjeno potezo z vidika igralca na potezi
 	public OcenjenaPoteza minimax(Igra igra, int globina) {
 		OcenjenaPoteza najboljsaPoteza = null;
 		List<Koordinati> moznePoteze = igra.poteze();
+		
 		for (Koordinati p: moznePoteze) {
-			//System.out.println(p);
-			Igra kopijaIgre = new Igra(igra);
-			//System.out.println(kopijaIgre);
-			
-			kopijaIgre.odigraj(p);
-			//System.out.println("test");
-			int ocena;
-			switch (kopijaIgre.stanje()) {
-			case ZMAGA_RDEÈ:;
-			case ZMAGA_MODER: ocena = ZMAGA; break;
 
+			Igra kopijaIgre = new Igra(igra);
+			kopijaIgre.odigraj(p);
+
+			int ocena;
+			
+			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
+			switch (kopijaIgre.stanje()) {
+			case ZMAGA_RDEÈ: 
+			case ZMAGA_MODER: {ocena = ZMAGA; 
+			//System.out.println(p);
+			//System.out.println(ocena);
+			}
 			default:
 				// nekdo je na potezi
 				if (globina == 1) ocena = OceniPozicijo.oceniPozicijo(kopijaIgre, igra.naPotezi());
 				// globina > 1
 				else ocena = -minimax(kopijaIgre, globina-1).ocena;
 			}
-
+			//System.out.println(p);
+			//System.out.println(ocena);
+			
 			if (najboljsaPoteza == null || ocena > najboljsaPoteza.ocena) {
 				najboljsaPoteza = new OcenjenaPoteza(p, ocena);	
-
 			}
 		}
 		return najboljsaPoteza;

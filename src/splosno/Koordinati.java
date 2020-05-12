@@ -1,4 +1,4 @@
-package koordinati;
+package splosno;
 
 public class Koordinati {
 	private int x;

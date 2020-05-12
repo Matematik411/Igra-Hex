@@ -17,7 +17,7 @@ import logika.Igra;
 import logika.Igralec;
 //import logika.Polje;
 import logika.Tocka;
-import koordinati.Koordinati;
+import splosno.Koordinati;
 
 /**
  * Pravokotno obmocje, v katerem je narisano igralno polje.

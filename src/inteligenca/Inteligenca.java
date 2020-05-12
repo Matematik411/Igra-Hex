@@ -1,9 +1,8 @@
 package inteligenca;
 
 import logika.Igra;
-
-import koordinati.Koordinati;
-import vodja.KdoIgra;
+import splosno.Koordinati;
+import splosno.KdoIgra;
 
 public abstract class Inteligenca extends KdoIgra {
 	

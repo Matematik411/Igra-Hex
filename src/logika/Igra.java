@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import koordinati.Koordinati;
+import splosno.Koordinati;
 
 
 
@@ -30,7 +30,7 @@ public class Igra {
 	public Igralec naPotezi;
 	
 	
-	// Konstruktor za igro 11x11
+	// Konstruktor za splosno igro
 	public Igra() {
 		this.plosca = new Tocka[N][N];
 		for (int i = 0; i < N; i++) {
@@ -89,7 +89,7 @@ public class Igra {
 	
 	// Vrne seznam možnih potez
 	public List<Koordinati> poteze() {
-		LinkedList<Koordinati> seznam = new LinkedList<Koordinati>(); //Predvidevam da je linked list kot Ocamel list ???
+		LinkedList<Koordinati> seznam = new LinkedList<Koordinati>(); 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				if (this.plosca[i][j].polje == Polje.PRAZNO) {
@@ -166,7 +166,7 @@ public class Igra {
 		}
 	}
 	
-	
+	// implementiran DFS za preverjanje ali smo prisli cez igralno mrezo
 	private void DFS(Tocka zacetek) {
 		zacetek.videna = true;
 		zacetek.predhodnji.add(zacetek);
@@ -190,7 +190,7 @@ public class Igra {
 	}
 	
 	
-	
+	// preveri ali je igre konec, vrne Stanje igre
 	public Stanje stanje() {
 		for (int i = 0; i < N; i++) {
 			this.pocisti();

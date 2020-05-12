@@ -1,4 +1,4 @@
-package vodja;
+package splosno;
 
 public class KdoIgra {
 	
