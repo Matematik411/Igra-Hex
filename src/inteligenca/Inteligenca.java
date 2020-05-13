@@ -51,15 +51,12 @@ public class Inteligenca extends KdoIgra {
 
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
-
 			int ocena;
-
+			
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
 			case ZMAGA_RDEÈ: 
 			case ZMAGA_MODER: {ocena = ZMAGA; 
-			//System.out.println(p);
-			//System.out.println(ocena);
 			}
 			default:
 				// nekdo je na potezi
@@ -67,18 +64,17 @@ public class Inteligenca extends KdoIgra {
 				// globina > 1
 				else ocena = -minimax(kopijaIgre, globina-1).ocena;
 			}
-			//System.out.println(p);
-			//System.out.println(ocena);
-			
+		
 			if (najboljsaPoteza == null || ocena > najboljsaPoteza.ocena) {
 				najboljsaPoteza = new OcenjenaPoteza(p, ocena);	
 			}
 		}
+
 		return najboljsaPoteza;
 	}
 		
 	// ------------ RANDOM MINIMAX --------------------------
-	// vrne seznam vseh potez, ki imajo najvecjo vrednost z vidike trenutnega igralca na potezi
+	// vrne seznam vseh potez, ki imajo najvecjo vrednost z vidika trenutnega igralca na potezi
 	public static List<OcenjenaPoteza> najboljsePoteze(Igra igra, int globina) {
 		NajboljseOcenjenePoteze najboljsePoteze = new NajboljseOcenjenePoteze();
 		List<Koordinati> moznePoteze = igra.poteze();

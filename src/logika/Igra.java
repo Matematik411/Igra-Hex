@@ -71,8 +71,8 @@ public class Igra {
 		}
 		this.naPotezi = igra.naPotezi();
 		this.konec = new HashSet<Tocka>();
-		this.rdece = new HashSet<Tocka>();
-		this.modre = new HashSet<Tocka>();
+		this.rdece = new HashSet<Tocka>(igra.rdece);
+		this.modre = new HashSet<Tocka>(igra.modre);
 	}
 	
 	
