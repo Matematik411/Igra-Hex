@@ -27,7 +27,7 @@ public class RandomMinimax extends Inteligenca {
 		return ocenjenePoteze.get(i).poteza;		
 	}
 	
-	// vrne seznam vseh potez, ki imajo največjo vrednost z vidike trenutnega igralca na potezi
+	// vrne seznam vseh potez, ki imajo najvecjo vrednost z vidike trenutnega igralca na potezi
 	public static List<OcenjenaPoteza> najboljsePoteze(Igra igra, int globina) {
 		NajboljseOcenjenePoteze najboljsePoteze = new NajboljseOcenjenePoteze();
 		List<Koordinati> moznePoteze = igra.poteze();

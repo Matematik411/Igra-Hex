@@ -5,6 +5,7 @@ import logika.Igralec;
 import logika.Tocka;
 
 public class OceniPozicijo {
+	private static final int ZMAGA = Integer.MAX_VALUE; // vrednost ob zmagi
 	
 	// zacetna verzija
 	// Metoda oceniPozicijo za igro Hex

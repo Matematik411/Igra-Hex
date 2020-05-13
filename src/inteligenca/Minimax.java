@@ -10,10 +10,8 @@ import inteligenca.OceniPozicijo;
 public class Minimax extends Inteligenca {
 	
 	private static final int ZMAGA = Integer.MAX_VALUE; // vrednost ob zmagi
-
-
-	
 	private int globina;
+	
 	
 	public Minimax (int globina) {
 		super("minimax globina " + globina);
@@ -37,7 +35,7 @@ public class Minimax extends Inteligenca {
 			kopijaIgre.odigraj(p);
 
 			int ocena;
-			System.out.println(kopijaIgre.stanje());
+
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
 			case ZMAGA_RDEÈ: 
