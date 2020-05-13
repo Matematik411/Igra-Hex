@@ -16,6 +16,7 @@ import java.util.List;
 
 import logika.Igra;
 import logika.Igralec;
+import splosno.KdoIgra;
 import splosno.Koordinati;
 
 public class Vodja {
@@ -25,8 +26,8 @@ public class Vodja {
 	public static Igra igra = null;
 	public static boolean clovekNaVrsti = false;
 	
-	//??
 	public static Map<Igralec,VrstaIgralca> vrstaIgralca;
+	public static Map<Igralec,KdoIgra> kdoIgra;
 	
 	public static void igramoNovoIgro () {
 		igra = new Igra();
@@ -90,7 +91,7 @@ public class Vodja {
 				try {poteza = get();} catch (Exception e) {};
 				if (igra == zacetnaIgra) {
 					igra.odigraj(poteza);
-					igramo ();
+					igramo();
 				}
 			}
 		};

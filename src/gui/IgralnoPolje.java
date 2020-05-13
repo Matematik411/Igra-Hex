@@ -243,7 +243,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					int j = (navpicno / 3) - 1;
 					int i = (vodoravno - j) / 2;
 					if (0 <= i && i < Igra.N && 0 <= j && j < Igra.N) {
-						Vodja.clovekovaPoteza (new Koordinati(i, j));
+						Vodja.clovekovaPoteza(new Koordinati(i, j));
 					}
 					
 				}
@@ -252,7 +252,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					int j = navpicno / 3;
 					int i = ((vodoravno - j) / 2) ;
 					if (0 <= i && i < Igra.N && 0 <= j && j < Igra.N) {
-						Vodja.clovekovaPoteza (new Koordinati(i, j));
+						Vodja.clovekovaPoteza(new Koordinati(i, j));
 					}
 					
 				}
@@ -268,7 +268,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					int j = (navpicno / 3) - 1;
 					int i = (vodoravno - j) / 2;
 					if (0 <= i && i < Igra.N && 0 <= j && j < Igra.N) {
-						Vodja.clovekovaPoteza (new Koordinati(i, j));
+						Vodja.clovekovaPoteza(new Koordinati(i, j));
 					}
 					
 				}
@@ -277,7 +277,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					int j = navpicno / 3;
 					int i = ((vodoravno - j) / 2) ;
 					if (0 <= i && i < Igra.N && 0 <= j && j < Igra.N) {
-						Vodja.clovekovaPoteza (new Koordinati(i, j));
+						Vodja.clovekovaPoteza(new Koordinati(i, j));
 					}
 					
 				}

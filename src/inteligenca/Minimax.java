@@ -37,7 +37,7 @@ public class Minimax extends Inteligenca {
 			kopijaIgre.odigraj(p);
 
 			int ocena;
-			
+			System.out.println(kopijaIgre.stanje());
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
 			case ZMAGA_RDEÈ: 
