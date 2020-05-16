@@ -52,11 +52,13 @@ public class Inteligenca extends KdoIgra {
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
 			int ocena;
+			System.out.println(kopijaIgre.stanje());
+
 			
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
 			case ZMAGA_RDEÈ: 
-			case ZMAGA_MODER: {ocena = ZMAGA; 
+			case ZMAGA_MODER: {ocena = ZMAGA; break;
 			}
 			default:
 				// nekdo je na potezi

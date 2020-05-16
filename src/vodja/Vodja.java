@@ -82,7 +82,7 @@ public class Vodja {
 			@Override
 			protected Koordinati doInBackground() {
 				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
-				try {TimeUnit.SECONDS.sleep(2);} catch (Exception e) {};
+				try {TimeUnit.SECONDS.sleep(0);} catch (Exception e) {};
 				return poteza;
 			}
 			@Override

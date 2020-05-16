@@ -60,19 +60,46 @@ public class Igra {
 	}
 	
 	// Konstruktor za kopijo igre igra
+//	public Igra(Igra igra) {
+//		this.plosca = new Tocka[N][N];
+//		for (int i = 0; i < N; i++) {
+//			for (int j = 0; j < N; j++) {
+//				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati);
+//				this.plosca[i][j].polje = igra.plosca[i][j].polje;
+//				this.plosca[i][j].sosedje = new HashSet<Tocka>(igra.plosca[i][j].sosedje);
+//			}
+//		}
+//		this.naPotezi = igra.naPotezi();
+//		this.konec = new HashSet<Tocka>();
+//		this.rdece = new HashSet<Tocka>(igra.rdece);
+//		this.modre = new HashSet<Tocka>(igra.modre);
+//	}
+	
 	public Igra(Igra igra) {
+		this.naPotezi = igra.naPotezi();
+		this.konec = new HashSet<Tocka>();
+		this.rdece = new HashSet<Tocka>();
+		this.modre = new HashSet<Tocka>();
 		this.plosca = new Tocka[N][N];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati);
 				this.plosca[i][j].polje = igra.plosca[i][j].polje;
-				this.plosca[i][j].sosedje = new HashSet<Tocka>(igra.plosca[i][j].sosedje);
+				this.plosca[i][j].sosedje = new HashSet<Tocka>();
 			}
 		}
-		this.naPotezi = igra.naPotezi();
-		this.konec = new HashSet<Tocka>();
-		this.rdece = new HashSet<Tocka>(igra.rdece);
-		this.modre = new HashSet<Tocka>(igra.modre);
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				Tocka t = this.plosca[i][j];
+				if (t.polje != Polje.PRAZNO) {
+					Polje p = t.polje;
+					t.polje = Polje.PRAZNO;
+					odigraj(t.koordinati, p);
+				}
+				
+			}
+		}
+
 	}
 	
 	
@@ -108,15 +135,17 @@ public class Igra {
 		}
 	}
 	
-	
+	public boolean odigraj(Koordinati p) {
+		return odigraj(p, this.naPotezi.getPolje());
+	}
 	
 	
 	// Vseeno nam je ali je kordinata v mejah
-	public boolean odigraj(Koordinati p) {	
+	public boolean odigraj(Koordinati p, Polje barva) {	
 		int x = p.getX();
 		int y = p.getY();
 		Tocka glavna = this.plosca[y][x];
-		Polje barva = this.naPotezi.getPolje();
+		//Polje barva = this.naPotezi.getPolje();
 		if (glavna.polje == Polje.PRAZNO) {
 			glavna.polje = barva;
 			if (barva == Polje.Rdeè) this.rdece.add(glavna);
