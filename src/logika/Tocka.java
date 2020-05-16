@@ -12,7 +12,7 @@ public class Tocka {
 	public Set<Tocka> sosedje;
 	public Polje polje;
 	public Koordinati koordinati;
-	public Set<Tocka> predhodnji;
+	public Tocka predhodnji;
 	public boolean videna;
 
 	
@@ -20,10 +20,15 @@ public class Tocka {
 		this.sosedje = new HashSet<Tocka>();
 		this.koordinati = koordinati;
 		this.polje = Polje.PRAZNO;
-		this.predhodnji = new HashSet<Tocka>();
 		this.videna = false;
 	}
 	
+	public Tocka (Koordinati koordinati, Polje polje) {	
+		this.sosedje = new HashSet<Tocka>();
+		this.koordinati = koordinati;
+		this.polje = polje;
+		this.videna = false;
+	}
 	
 	
 }

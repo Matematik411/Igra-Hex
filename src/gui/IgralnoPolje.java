@@ -70,7 +70,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		double x = xSred - d * 0.5;
 		double y = ySred - d * 0.5;
 		
-		if (p == Igralec.Rdeè) g2.setColor(Color.RED);
+		if (p == Igralec.Rdec) g2.setColor(Color.RED);
 		else g2.setColor(Color.BLUE);
 		g2.fillOval((int)x, (int)y, (int)d , (int)d);
 	}
@@ -201,7 +201,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 				for (int j = 0; j < Igra.N; j++) {
 					switch(plosca[j][i].polje) {
 					case Moder: narisiZeton(g2, i, j, Igralec.Moder); break;
-					case Rdeè: narisiZeton(g2, i, j, Igralec.Rdeè); break;
+					case Rdec: narisiZeton(g2, i, j, Igralec.Rdec); break;
 					default: break;
 					}
 				}

@@ -57,7 +57,7 @@ public class Inteligenca extends KdoIgra {
 			
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
-			case ZMAGA_RDEÈ: 
+			case ZMAGA_RDEC: 
 			case ZMAGA_MODER: {ocena = ZMAGA; break;
 			}
 			default:
@@ -85,7 +85,7 @@ public class Inteligenca extends KdoIgra {
 			tempIgra.odigraj (p);	//poskusimo vsako potezo v novi kopiji igre
 			int ocena;
 			switch (tempIgra.stanje()) {
-			case ZMAGA_RDEÈ:
+			case ZMAGA_RDEC:
 			case ZMAGA_MODER: ocena = ZMAGA; break; // p je zmagovalna poteza
 			default: //nekdo je na potezi
 				if (globina==1) ocena = OceniPozicijo.oceniPozicijo(tempIgra,igra.naPotezi());

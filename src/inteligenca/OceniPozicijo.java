@@ -12,7 +12,7 @@ public class OceniPozicijo {
 	
 	public static int oceniPozicijo(Igra igra, Igralec jaz) {
 		int ocena = 0;
-		if (jaz == Igralec.Rdeè) {
+		if (jaz == Igralec.Rdec) {
 			
 			for (Tocka t : igra.rdece) ocena += 1 + t.sosedje.size();
 

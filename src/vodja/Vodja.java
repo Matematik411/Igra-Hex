@@ -21,7 +21,7 @@ import splosno.Koordinati;
 
 public class Vodja {
 	
-	public static enum VrstaIgralca { Raèunalnik, Èlovek; }
+	public static enum VrstaIgralca { Racunalnik, Clovek; }
 	public static GlavnoOkno okno;
 	public static Igra igra = null;
 	public static boolean clovekNaVrsti = false;
@@ -44,7 +44,7 @@ public class Vodja {
 		okno.osveziGUI();
 
 		switch (igra.stanje()) {
-		case ZMAGA_RDEÈ: 
+		case ZMAGA_RDEC: 
 			break;
 		case ZMAGA_MODER: 
 			break;
@@ -52,18 +52,18 @@ public class Vodja {
 			Igralec igralec = igra.naPotezi;
 			VrstaIgralca vrstaNaPotezi = vrstaIgralca.get(igralec);
 			switch (vrstaNaPotezi) {
-			case Èlovek: 
+			case Clovek: 
 				clovekNaVrsti = true;
 				break;
-			case Raèunalnik:
+			case Racunalnik:
 				racunalnikovaPoteza();
 				break;
 			}
 		}
 	}
 	
-//	private static Random random = new Random ();
-//	
+	private static Random random = new Random ();
+	
 //	public static void racunalnikovaPoteza() {
 //		List<Koordinati> moznePoteze = igra.poteze();
 //		int randomIndex = random.nextInt(moznePoteze.size());

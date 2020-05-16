@@ -1,15 +1,15 @@
 package logika;
 
 public enum Igralec {
-	Rdeè, Moder;
+	Rdec, Moder;
 	
 	public Igralec nasprotnik() {
-		if (this == Rdeè) return Moder;
-		else return Rdeè;
+		if (this == Rdec) return Moder;
+		else return Rdec;
 	}
 	
 	public Polje getPolje() {
-		if (this == Rdeè) return Polje.Rdeè;
+		if (this == Rdec) return Polje.Rdec;
 		else return Polje.Moder;
 	}
 }

@@ -38,7 +38,7 @@ public class Minimax extends Inteligenca {
 
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
-			case ZMAGA_RDEÈ: 
+			case ZMAGA_RDEC:
 			case ZMAGA_MODER: {ocena = ZMAGA; 
 			//System.out.println(p);
 			//System.out.println(ocena);

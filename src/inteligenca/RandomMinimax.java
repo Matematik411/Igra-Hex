@@ -36,7 +36,7 @@ public class RandomMinimax extends Inteligenca {
 			tempIgra.odigraj (p);	//poskusimo vsako potezo v novi kopiji igre
 			int ocena;
 			switch (tempIgra.stanje()) {
-			case ZMAGA_RDEÈ:
+			case ZMAGA_RDEC:
 			case ZMAGA_MODER: ocena = ZMAGA; break; // p je zmagovalna poteza
 			default: //nekdo je na potezi
 				if (globina==1) ocena = OceniPozicijo.oceniPozicijo(tempIgra,igra.naPotezi());
