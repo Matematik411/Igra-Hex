@@ -1,6 +1,8 @@
 import gui.GlavnoOkno;
 import vodja.Vodja;
 
+//TEST
+
 public class Hex {
 	public static void main(String[] args) {
 		GlavnoOkno glavno_okno = new GlavnoOkno();
