@@ -58,7 +58,6 @@ public class Igra {
 		this.rdece = new HashSet<Tocka>();
 		this.modre = new HashSet<Tocka>();
 	}
-	
 	// Konstruktor za kopijo igre igra
 //	public Igra(Igra igra) {
 //		this.plosca = new Tocka[N][N];
@@ -86,6 +85,7 @@ public class Igra {
 				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati);
 				this.plosca[i][j].polje = igra.plosca[i][j].polje;
 				this.plosca[i][j].sosedje = new HashSet<Tocka>();
+				// zamenjaš vse na tem mestu....
 			}
 		}
 		for (int i = 0; i < N; i++) {

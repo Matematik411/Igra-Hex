@@ -1,7 +1,7 @@
 import gui.GlavnoOkno;
 import vodja.Vodja;
 
-//TEST
+//TEST - vidimo :)
 
 public class Hex {
 	public static void main(String[] args) {
