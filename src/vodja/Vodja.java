@@ -1,18 +1,13 @@
 package vodja;
 
-
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingWorker;
 
 import gui.GlavnoOkno;
 import inteligenca.Inteligenca;
-import inteligenca.Minimax;
-import inteligenca.RandomMinimax;
 
 import java.util.Map;
-import java.util.List;
 
 import logika.Igra;
 import logika.Igralec;
@@ -62,15 +57,6 @@ public class Vodja {
 		}
 	}
 	
-	private static Random random = new Random ();
-	
-//	public static void racunalnikovaPoteza() {
-//		List<Koordinati> moznePoteze = igra.poteze();
-//		int randomIndex = random.nextInt(moznePoteze.size());
-//		Koordinati poteza = moznePoteze.get(randomIndex);
-//		igra.odigraj(poteza);
-//		igramo();	
-//	}
 
 	
 	public static Inteligenca racunalnikovaInteligenca = new Inteligenca("RAC");

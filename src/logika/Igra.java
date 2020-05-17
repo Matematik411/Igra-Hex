@@ -25,10 +25,16 @@ public class Igra {
 	// Igralno polje
 	private Tocka[][] plosca;
 	
-	private Tocka rdeca_zgoraj;
-	private Tocka rdeca_spodaj;
-	private Tocka modra_levo;
-	private Tocka modra_desno;
+	// mislim da dela tud kr tk, ker te toèke so tk stalne
+	private Tocka rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
+	private Tocka rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
+	private Tocka modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
+	private Tocka modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
+	
+//	private Tocka rdeca_zgoraj;
+//	private Tocka rdeca_spodaj;
+//	private Tocka modra_levo;
+//	private Tocka modra_desno;
 	
 	// Igralec, ki je trenutno na potezi.
 	// Vrednost je poljubna, lahko je napaèna, èe je igre konec.
@@ -37,21 +43,7 @@ public class Igra {
 	
 	// Konstruktor za splosno igro
 	public Igra() {
-		this.plosca = new Tocka[N][N];
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				plosca[i][j] = new Tocka(new Koordinati(j, i));
-			}
-		}
-		this.naPotezi = Igralec.Rdec;
-		this.konec = new HashSet<Tocka>();
-		this.rdece = new HashSet<Tocka>();
-		this.modre = new HashSet<Tocka>();
-		
-		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
-		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
-		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
-		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
+		this(N);
 	}
 	
 	// Konstruktor za igro NxN
@@ -68,45 +60,33 @@ public class Igra {
 		this.rdece = new HashSet<Tocka>();
 		this.modre = new HashSet<Tocka>();
 		
-		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
-		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
-		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
-		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
+//		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
+//		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
+//		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
+//		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
 	}
-	// Konstruktor za kopijo igre igra
-//	public Igra(Igra igra) {
-//		this.plosca = new Tocka[N][N];
-//		for (int i = 0; i < N; i++) {
-//			for (int j = 0; j < N; j++) {
-//				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati);
-//				this.plosca[i][j].polje = igra.plosca[i][j].polje;
-//				this.plosca[i][j].sosedje = new HashSet<Tocka>(igra.plosca[i][j].sosedje);
-//			}
-//		}
-//		this.naPotezi = igra.naPotezi();
-//		this.konec = new HashSet<Tocka>();
-//		this.rdece = new HashSet<Tocka>(igra.rdece);
-//		this.modre = new HashSet<Tocka>(igra.modre);
-//	}
+	
+	
+
 	
 	public Igra(Igra igra) {
 		this.naPotezi = igra.naPotezi();
-		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
-		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
-		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
-		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
+//		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
+//		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
+//		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
+//		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
 		this.konec = new HashSet<Tocka>();
 		this.rdece = new HashSet<Tocka>();
 		this.modre = new HashSet<Tocka>();
 		this.plosca = new Tocka[N][N];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati);
-				this.plosca[i][j].polje = igra.plosca[i][j].polje;
+				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati, igra.plosca[i][j].polje);
 				this.plosca[i][j].sosedje = new HashSet<Tocka>();
-				// zamenjaš vse na tem mestu....
 			}
 		}
+		
+		// zamenjati bi jih tako mogel tu, ko je vse zgrajeno, tako da ne bo veliko bolje
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				Tocka t = this.plosca[i][j];
@@ -225,7 +205,7 @@ public class Igra {
 	
 	private void zmagovalna_pot(Tocka tocka) {
 		Tocka prejsnja = tocka.predhodnji;
-		if (prejsnja != this.rdeca_zgoraj || prejsnja != this.modra_levo) {
+		if (prejsnja != this.rdeca_zgoraj && prejsnja != this.modra_levo) {
 			this.konec.add(prejsnja);
 			zmagovalna_pot(prejsnja);
 		}
@@ -251,16 +231,13 @@ public class Igra {
 		this.pocisti();
 		DFS(rdeca_zgoraj);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_RDEC;
+		this.pocisti();
 		DFS(modra_levo);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_MODER;		
 		return Stanje.V_TEKU;
 	}
 	
-		
-	@Override
-	public String toString() {
-		return this.plosca[0][0].polje.toString();
-	}
+
 		
 		
 		
