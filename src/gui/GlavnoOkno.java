@@ -35,8 +35,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private JMenuItem igraRacunalnikClovek;
 	private JMenuItem igraClovekClovek;
 	private JMenuItem igraRacunalnikRacunalnik;
-	private JMenuItem imeRdecega;
-	private JMenuItem imeModrega;
+	//private JMenuItem imeRdecega;
+	//private JMenuItem imeModrega;
 	private JMenuItem v5, v6, v7, v8, v9, v10, v11, v12, v13;
 
 	// ustvari igro
@@ -72,13 +72,13 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		JMenu nastavitve = new JMenu("Nastavitve");
 		menu_bar.add(nastavitve);
 		
-		imeRdecega = new JMenuItem("Nastavi ime rdecega");
-		nastavitve.add(imeRdecega);
-		imeRdecega.addActionListener(this);
-		
-		imeModrega = new JMenuItem("Nastavi ime modrega");
-		nastavitve.add(imeModrega);
-		imeModrega.addActionListener(this);
+//		imeRdecega = new JMenuItem("Nastavi ime rdecega");
+//		nastavitve.add(imeRdecega);
+//		imeRdecega.addActionListener(this);
+//		
+//		imeModrega = new JMenuItem("Nastavi ime modrega");
+//		nastavitve.add(imeModrega);
+//		imeModrega.addActionListener(this);
 		
 		JMenu velikostIgre = new JMenu("Nastavi velikost igralne mreze");
 		nastavitve.add(velikostIgre);
@@ -172,8 +172,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			Vodja.kdoIgra.put(Igralec.Rdec, Vodja.racunalnikovaInteligenca); 
 			Vodja.kdoIgra.put(Igralec.Moder, Vodja.racunalnikovaInteligenca);
 			Vodja.igramoNovoIgro();
-		} else if (e.getSource() == imeRdecega) {
-		} else if (e.getSource() == imeModrega) {
+		//} else if (e.getSource() == imeRdecega) {
+		//} else if (e.getSource() == imeModrega) {
 		} else {
 			if (e.getSource() == v5) {
 				Igra.N = 5;
