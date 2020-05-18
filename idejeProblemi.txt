@@ -1,0 +1,15 @@
+ne delajo naslednje stvari:
+-alphaBeta minimax
+-minimax nasploh, ko je racunalnik moder
+
+
+
+
+
+dodajanje:
+- ce hoceva obarvati zadno potezo, more imeti nek parameter sama Tocka
+
+- ta metoda, za preverjanje koliko rabi najbrz podobna BFS
+KO PA JO IMAVA, ideje:
+--izbrane tocke taksne, ki so men najmanjsimi stevilkami ob strani in cim bolj proste (okrog najvec praznih)
+--dodaten bonus, ce ravno po diag ena vmes do neke iste barve (tista moznost, da se lahk pol po 2 poteh poveze - (x-1, y-1) ~ (x, y)) 
