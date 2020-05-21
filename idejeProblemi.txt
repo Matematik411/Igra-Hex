@@ -7,9 +7,32 @@ ne delajo naslednje stvari:
 
 
 dodajanje:
-- ce hoceva obarvati zadno potezo, more imeti nek parameter sama Tocka
+- ce hoceva obarvati zadno potezo, more imeti nek parameter Igra.
+- "undo" button
+- "switch position" button
+- BFS
+- ?? se kaj ??
 
-- ta metoda, za preverjanje koliko rabi najbrz podobna BFS
-KO PA JO IMAVA, ideje:
---izbrane tocke taksne, ki so men najmanjsimi stevilkami ob strani in cim bolj proste (okrog najvec praznih)
---dodaten bonus, ce ravno po diag ena vmes do neke iste barve (tista moznost, da se lahk pol po 2 poteh poveze - (x-1, y-1) ~ (x, y)) 
+
+
+
+KAJ BOVA IMELA V OCENI POZICIJO(21.5.)
+-OceniPozicijoKoncna - (metoda, ki jo kliceva na globini 1)
+za spodnjo vrsto/desni stolpec vsak naredi oba pregleda
+nato vrne neko stevilko:
+-- boljsa kot je pozicija za igralca, iz cigar vidika gledava, vecja je ta stevilka
+
+-OceniPozicijoZacetna - (motoda, ki jo kliceva na zacetku vsakega klica alphabete)
+pregleda mrezo in glede na zgornjih 5 polj in polj levo&desno pripise vsakemu polju stevilo, koliko zetonov manjka do zakljucene poti
+vrne mnozico/seznam najboljsih potez, ki jih bova nato v minimaxu imela kot MoznePoteze
+--velikost te mnozice bo odvisna od globine
+
+???Preveri ali nasprotnik zapolnil par???
+
+
+-_-_-_- s tem se nato dela minimax. :) xD :P B)
+
+
+
+
+

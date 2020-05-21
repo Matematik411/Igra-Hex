@@ -59,7 +59,7 @@ public class Vodja {
 	
 
 	
-	public static Inteligenca racunalnikovaInteligenca = new Inteligenca("RAC");
+	public static Inteligenca racunalnikovaInteligenca = new Inteligenca();
 	
 	public static void racunalnikovaPoteza() {
 		Igra zacetnaIgra = igra;

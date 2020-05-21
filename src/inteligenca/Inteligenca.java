@@ -18,9 +18,9 @@ public class Inteligenca extends KdoIgra {
 	private int ai;
 	
 	public Inteligenca () {
-		super("Skupina1234");
-		this.globina = 4;
-		this.ai = 2;
+		super("Rehoboam");
+		this.globina = 2;
+		this.ai = 0;
 	}
 	
 	public void nastaviGlobino(int d) {
@@ -116,6 +116,7 @@ public class Inteligenca extends KdoIgra {
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
 			int ocenaPoteze;
+			
 			if (kopijaIgre.stanje() != Stanje.V_TEKU) {
 				System.out.println(kopijaIgre.stanje());
 			}
@@ -133,11 +134,11 @@ public class Inteligenca extends KdoIgra {
 				else ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
 			}
 			
-			if (ocenaPoteze < 0 || ocenaPoteze > 1000) {
-				System.out.println(ocenaPoteze);
-				System.out.println(ocena);
-			}
-				
+//			if (ocenaPoteze < 0 || ocenaPoteze > 1000) {
+//				System.out.println(ocenaPoteze);
+//				System.out.println(ocena);
+//			}
+		
 			if (igra.naPotezi() == jaz) {
 				if (ocenaPoteze > ocena) {
 					ocena = ocenaPoteze;
