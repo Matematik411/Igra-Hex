@@ -17,8 +17,8 @@ public class Inteligenca extends KdoIgra {
 	private int globina;
 	private int ai;
 	
-	public Inteligenca (String ime) {
-		super(ime);
+	public Inteligenca () {
+		super("Skupina1234");
 		this.globina = 4;
 		this.ai = 2;
 	}
@@ -58,7 +58,7 @@ public class Inteligenca extends KdoIgra {
 			kopijaIgre.odigraj(p);
 			int ocena;
 			
-			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
+			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreï¿½i
 			switch (kopijaIgre.stanje()) {
 			case ZMAGA_RDEC: 
 			case ZMAGA_MODER: ocena = ZMAGA; break;
