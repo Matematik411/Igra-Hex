@@ -19,7 +19,7 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca (String ime) {
 		super(ime);
-		this.globina = 4;
+		this.globina = 2;
 		this.ai = 2;
 	}
 	
@@ -57,6 +57,9 @@ public class Inteligenca extends KdoIgra {
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
 			int ocena;
+			if (kopijaIgre.stanje() != Stanje.V_TEKU) {
+				System.out.println(kopijaIgre.stanje());
+			}
 			
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreèi
 			switch (kopijaIgre.stanje()) {
@@ -130,7 +133,7 @@ public class Inteligenca extends KdoIgra {
 				else ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
 			}
 			
-			if (ocenaPoteze < 0) {
+			if (ocenaPoteze < 0 || ocenaPoteze > 1000) {
 				System.out.println(ocenaPoteze);
 				System.out.println(ocena);
 			}
