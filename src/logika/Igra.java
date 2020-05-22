@@ -91,10 +91,6 @@ public class Igra {
 			}
 		}
 		this.naPotezi = igra.naPotezi();
-<<<<<<< HEAD
-
-=======
->>>>>>> bfc1ff36e895acad12f5567de76c13ee8e3bcacb
 	}
 	
 	
