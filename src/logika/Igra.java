@@ -18,7 +18,7 @@ public class Igra {
 	
 	// Zmagovalna èrta
 	public Set<Tocka> konec;
-	
+	public int velikost;
 	public Set<Tocka> rdece;
 	public Set<Tocka> modre;
 	
@@ -48,6 +48,7 @@ public class Igra {
 	
 	// Konstruktor za igro NxN
 	public Igra(int M) {
+		this.velikost = M;
 		this.plosca = new Tocka[M][M];
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < M; j++) {
@@ -70,6 +71,7 @@ public class Igra {
 
 	
 	public Igra(Igra igra) {
+		this.velikost = igra.velikost;
 		this.naPotezi = igra.naPotezi();
 //		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
 //		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
@@ -98,6 +100,7 @@ public class Igra {
 				
 			}
 		}
+		this.naPotezi = igra.naPotezi();
 
 	}
 	
