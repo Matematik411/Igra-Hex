@@ -41,7 +41,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(750, 500);
+		return new Dimension(850, 500);
 	}
 
 	
@@ -70,7 +70,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.fillOval((int)x, (int)y, (int)d , (int)d);
 		
 		// zadnjega poudari
-		if (Vodja.igra.zadnja.koordinati.getX() == i && Vodja.igra.zadnja.koordinati.getY() == j) {
+		if (Vodja.igra.zadnja != null && Vodja.igra.zadnja.koordinati.getX() == i && Vodja.igra.zadnja.koordinati.getY() == j) {
 			g2.setStroke(new BasicStroke((float) (1.5 * a * LINE_WIDTH)));
 			g2.setColor(Color.ORANGE);
 			g2.drawOval((int)x, (int)y, (int)d, (int)d);

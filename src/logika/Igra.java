@@ -62,9 +62,7 @@ public class Igra {
 
 	}
 	
-	
-
-	
+	// konstruktor za kopijo igre
 	public Igra(Igra igra) {
 		this.naPotezi = igra.naPotezi();
 		this.konec = new HashSet<Tocka>();
@@ -90,7 +88,7 @@ public class Igra {
 				
 			}
 		}
-
+		this.naPotezi = igra.naPotezi();
 	}
 	
 	
@@ -174,7 +172,7 @@ public class Igra {
 				dodaj_povezavo(tocka6, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			
-			this.naPotezi = this.naPotezi.nasprotnik();
+			this.naPotezi = this.naPotezi.nasprotnik(); 
 			this.zadnja = glavna;
 			return true;
 		}
@@ -183,6 +181,26 @@ public class Igra {
 		}
 	}
 
+	// metoda za razveljavitev zadnje poteze (na voljo le v verziji clovek vs clovek)
+	public void razveljavi() {
+		for (Tocka t : this.zadnja.sosedje) {
+			t.sosedje.remove(this.zadnja);
+		}
+		this.plosca[this.zadnja.koordinati.getY()][this.zadnja.koordinati.getX()] 
+				= new Tocka(this.zadnja.koordinati);
+		this.naPotezi = this.naPotezi.nasprotnik();
+		this.zadnja = null;
+	}
+	
+	// metoda za menjanje barve (tudi ta na voljo le v clovek vs clovek, zato le zamenja barvo prvega zetona)
+	public void menjaj() {
+		Koordinati prva = this.zadnja.koordinati;
+		razveljavi();
+		this.naPotezi = this.naPotezi.nasprotnik();
+		odigraj(new Koordinati(prva.getY(), prva.getX()));
+		
+		
+	}
 	
 	private void pocisti() {
 		for (Tocka tocka : this.rdece) {
