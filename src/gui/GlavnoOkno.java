@@ -7,11 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EnumMap;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import vodja.Vodja;
 import vodja.Vodja.VrstaIgralca;
@@ -26,15 +28,23 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	// polje, kjer igramo igro
 	private IgralnoPolje polje;
 
+	// za dodatne nastavitve naredimo nov JPanel
+	private JPanel dodatno;
 	
 	//Statusna vrstica v spodnjem delu okna
 	private JLabel status;
+	
+
 	
 	// Izbire v menujih
 	private JMenuItem igraClovekRacunalnik;
 	private JMenuItem igraRacunalnikClovek;
 	private JMenuItem igraClovekClovek;
 	private JMenuItem igraRacunalnikRacunalnik;
+	
+	private JButton menjaj;
+	private JButton razveljavi;
+
 	//private JMenuItem imeRdecega;
 	//private JMenuItem imeModrega;
 	private JMenuItem v5, v6, v7, v8, v9, v10, v11, v12, v13;
@@ -123,19 +133,36 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		getContentPane().add(polje, polje_layout); // da vzame polje in layout skupaj
 		
 		// statusna vrstica za sporocila
-		status = new JLabel();
-		status.setFont(new Font(status.getFont().getName(),
-							    status.getFont().getStyle(),
-							    20));
+		dodatno = new JPanel();
+
 		GridBagConstraints status_layout = new GridBagConstraints();
 		status_layout.gridx = 0;
 		status_layout.gridy = 1;
 		status_layout.anchor = GridBagConstraints.CENTER;
-		getContentPane().add(status, status_layout);
 		
+		status = new JLabel();
+		status.setFont(new Font(status.getFont().getName(),
+			    status.getFont().getStyle(),
+			    20));
 		status.setText("Izberite igro!");
 		
+		menjaj = new JButton("Menjaj barvo!");
+		dodatno.add(menjaj);
+		menjaj.addActionListener(this);
+		
+		razveljavi = new JButton("Razveljavi zadnjo potezo!");
+		dodatno.add(razveljavi);
+		razveljavi.addActionListener(this);
+
+		dodatno.add(status);
+		dodatno.add(menjaj);
+		dodatno.add(razveljavi);
+		getContentPane().add(dodatno, status_layout);
+		menjaj.setVisible(false);
+		razveljavi.setVisible(false);
+
 	}
+	
 	
 	
 	@Override
@@ -172,8 +199,10 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			Vodja.kdoIgra.put(Igralec.Rdec, Vodja.racunalnikovaInteligenca); 
 			Vodja.kdoIgra.put(Igralec.Moder, Vodja.racunalnikovaInteligenca);
 			Vodja.igramoNovoIgro();
-		//} else if (e.getSource() == imeRdecega) {
-		//} else if (e.getSource() == imeModrega) {
+		} else if (e.getSource() == menjaj) {
+			Vodja.menjajBarvo();
+		} else if (e.getSource() == razveljavi) {
+			Vodja.razveljaviPotezo();
 		} else {
 			if (e.getSource() == v5) {
 				Igra.N = 5;
@@ -196,8 +225,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			}
 			Vodja.igra = null;
 			Vodja.clovekNaVrsti = false;
-			osveziGUI();
 		}
+		osveziGUI();
 	}
 	
 	// GUI = graphical user interface
@@ -209,15 +238,29 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			switch(Vodja.igra.stanje()) {
 			case V_TEKU: 
 				status.setText("Na potezi je " + Vodja.igra.naPotezi() + 
-						" - " + Vodja.kdoIgra.get(Vodja.igra.naPotezi()).ime()); 
+						" - " + Vodja.kdoIgra.get(Vodja.igra.naPotezi()).ime());
+				
+
+				if (Vodja.vrstaIgralca.get(Igralec.Rdec) == VrstaIgralca.Clovek && 
+						Vodja.vrstaIgralca.get(Igralec.Moder) == VrstaIgralca.Clovek) {
+					menjaj.setVisible(false);
+					razveljavi.setVisible(true);
+					if (Vodja.igra.modre.isEmpty() && !Vodja.igra.rdece.isEmpty()) {
+						menjaj.setVisible(true);
+					}
+					if (Vodja.igra.zadnja == null) razveljavi.setVisible(false);
+
+				}
 				break;
 			case ZMAGA_RDEC: 
 				status.setText("Zmagal je RDEC - " + 
-						Vodja.kdoIgra.get(Vodja.igra.naPotezi().nasprotnik()).ime()); 
+						Vodja.kdoIgra.get(Vodja.igra.naPotezi().nasprotnik()).ime());
+				razveljavi.setVisible(false);
 				break;
 			case ZMAGA_MODER: 
 				status.setText("Zmagal je MODER - " + 
 						Vodja.kdoIgra.get(Vodja.igra.naPotezi().nasprotnik()).ime());
+				razveljavi.setVisible(false);
 				break;
 			}
 		}

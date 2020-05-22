@@ -2,15 +2,16 @@ ne delajo naslednje stvari:
 -alphaBeta minimax
 -minimax nasploh, ko je racunalnik moder
 
-
+ALI BOVA MELA V KLICIH this.igra? ali samo igra?
+dajva se zmenit, da bo konsistentno :)
 
 
 
 dodajanje:
-- ce hoceva obarvati zadno potezo, more imeti nek parameter Igra.
-- "undo" button
-- "switch position" button
-- BFS
+- ce hoceva obarvati zadno potezo, more imeti nek parameter Igra. (done)
+- "undo" button (done)
+- "switch position" button (done)
+- BFS (done)
 - ?? se kaj ??
 
 

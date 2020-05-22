@@ -90,4 +90,12 @@ public class Vodja {
 		igramo();
 	}
 	
+	public static void razveljaviPotezo() {
+		igra.razveljavi();
+	}
+	
+	public static void menjajBarvo() {
+		igra.menjaj();
+	}
+	
 }

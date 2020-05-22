@@ -17,11 +17,12 @@ public class Inteligenca extends KdoIgra {
 	private int globina;
 	private int ai;
 	
-	public Inteligenca () {
+	public Inteligenca() {
 		super("Rehoboam");
 		this.globina = 4;
 		this.ai = 0;
 	}
+	
 	
 	public void nastaviGlobino(int d) {
 		this.globina = d;

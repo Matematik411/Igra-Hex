@@ -25,16 +25,16 @@ public class Igra {
 	// Igralno polje
 	private Tocka[][] plosca;
 	
+	// Zadnja igrana poteza
+	public Tocka zadnja;
+	
 	// mislim da dela tud kr tk, ker te toèke so tk stalne
 	private Tocka rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
 	private Tocka rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
 	private Tocka modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
 	private Tocka modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
 	
-//	private Tocka rdeca_zgoraj;
-//	private Tocka rdeca_spodaj;
-//	private Tocka modra_levo;
-//	private Tocka modra_desno;
+
 	
 	// Igralec, ki je trenutno na potezi.
 	// Vrednost je poljubna, lahko je napaèna, èe je igre konec.
@@ -60,23 +60,13 @@ public class Igra {
 		this.konec = new HashSet<Tocka>();
 		this.rdece = new HashSet<Tocka>();
 		this.modre = new HashSet<Tocka>();
-		
-//		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
-//		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
-//		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
-//		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
+
 	}
 	
-	
-
-	
+	// konstruktor za kopijo igre
 	public Igra(Igra igra) {
 		this.velikost = igra.velikost;
 		this.naPotezi = igra.naPotezi();
-//		this.rdeca_zgoraj = new Tocka(new Koordinati(-1, 0), Polje.Rdec);
-//		this.rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
-//		this.modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
-//		this.modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
 		this.konec = new HashSet<Tocka>();
 		this.rdece = new HashSet<Tocka>();
 		this.modre = new HashSet<Tocka>();
@@ -101,7 +91,10 @@ public class Igra {
 			}
 		}
 		this.naPotezi = igra.naPotezi();
+<<<<<<< HEAD
 
+=======
+>>>>>>> bfc1ff36e895acad12f5567de76c13ee8e3bcacb
 	}
 	
 	
@@ -185,7 +178,8 @@ public class Igra {
 				dodaj_povezavo(tocka6, glavna);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 			
-			this.naPotezi = this.naPotezi.nasprotnik();
+			this.naPotezi = this.naPotezi.nasprotnik(); 
+			this.zadnja = glavna;
 			return true;
 		}
 		else {
@@ -193,6 +187,26 @@ public class Igra {
 		}
 	}
 
+	// metoda za razveljavitev zadnje poteze (na voljo le v verziji clovek vs clovek)
+	public void razveljavi() {
+		for (Tocka t : this.zadnja.sosedje) {
+			t.sosedje.remove(this.zadnja);
+		}
+		this.plosca[this.zadnja.koordinati.getY()][this.zadnja.koordinati.getX()] 
+				= new Tocka(this.zadnja.koordinati);
+		this.naPotezi = this.naPotezi.nasprotnik();
+		this.zadnja = null;
+	}
+	
+	// metoda za menjanje barve (tudi ta na voljo le v clovek vs clovek, zato le zamenja barvo prvega zetona)
+	public void menjaj() {
+		Koordinati prva = this.zadnja.koordinati;
+		razveljavi();
+		this.naPotezi = this.naPotezi.nasprotnik();
+		odigraj(new Koordinati(prva.getY(), prva.getX()));
+		
+		
+	}
 	
 	private void pocisti() {
 		for (Tocka tocka : this.rdece) {
@@ -203,39 +217,103 @@ public class Igra {
 			tocka.videna = false;
 			tocka.predhodnji = null;
 		}
+		rdeca_zgoraj.videna =  false;
+		rdeca_zgoraj.predhodnji = null;
+		rdeca_spodaj.videna =  false;
+		rdeca_spodaj.predhodnji = null;
+		modra_levo.videna =  false;
+		modra_levo.predhodnji = null;
+		modra_desno.videna =  false;
+		modra_desno.predhodnji = null;
 	}
 	
 	
-	private void zmagovalna_pot(Tocka tocka) {
-		Tocka prejsnja = tocka.predhodnji;
-		if (prejsnja != this.rdeca_zgoraj && prejsnja != this.modra_levo) {
-			this.konec.add(prejsnja);
-			zmagovalna_pot(prejsnja);
-		}
-	}
-	
-	
-	// implementiran DFS za preverjanje ali smo prisli cez igralno mrezo
-	private void DFS(Tocka zacetek) {
+//	private void zmagovalna_pot(Tocka tocka) {
+//		Tocka prejsnja = tocka.predhodnji;
+//		if (prejsnja != this.rdeca_zgoraj && prejsnja != this.modra_levo) {
+//			this.konec.add(prejsnja);
+//			zmagovalna_pot(prejsnja);
+//		}
+//	}
+//	
+//
+//	// implementiran DFS za preverjanje ali smo prisli cez igralno mrezo
+//	private void DFS(Tocka zacetek) {
+//		zacetek.videna = true;
+//		for (Tocka sosed : zacetek.sosedje) {
+//			if(sosed!=null && !sosed.videna) {
+//				sosed.predhodnji = zacetek;
+//				if (sosed == this.rdeca_spodaj) zmagovalna_pot(rdeca_spodaj);
+//				if (sosed == this.modra_desno) zmagovalna_pot(modra_desno);
+//				DFS(sosed);
+//			}
+//		}
+//	}
+//	
+	// implementiran BFS
+	private void BFS(Tocka zacetek) {
+		Queue q = new Queue();
+		q.vstavi(zacetek);
+		
 		zacetek.videna = true;
-		for (Tocka sosed : zacetek.sosedje) {
-			if(sosed!=null && !sosed.videna) {
-				sosed.predhodnji = zacetek;
-				if (sosed == this.rdeca_spodaj) zmagovalna_pot(rdeca_spodaj);
-				if (sosed == this.modra_desno) zmagovalna_pot(modra_desno);
-				DFS(sosed);
+		
+		while (!q.jePrazen()) {
+			Tocka t = q.vzami();
+			Set<Tocka> sosedje = t.sosedje;
+			
+			for (Tocka p : sosedje) {
+				if (!p.videna) {
+					q.vstavi(p);
+					p.videna = true;
+					p.predhodnji = t;
+				}
 			}
 		}
+		
+		// do sem shrani vse v predhodnje
+		// preveri ali imamo celo pot
+		
+		Set<Tocka> koncni = new HashSet<Tocka>();
+		if (rdeca_zgoraj.predhodnji != null) {
+			
+			Tocka t = rdeca_zgoraj.predhodnji;
+			while (t != null) {
+				koncni.add(t);
+				t = t.predhodnji;
+			}
+			
+			if (koncni.contains(rdeca_spodaj)) {
+				koncni.remove(rdeca_spodaj);
+				this.konec = koncni;
+			}
+		} else if (modra_levo.predhodnji != null) {
+			Tocka t = modra_levo.predhodnji;
+			while (t != null) {
+				koncni.add(t);
+				t = t.predhodnji;
+			}
+			
+			if (koncni.contains(modra_desno)) {
+				koncni.remove(modra_desno);
+				this.konec = koncni;
+			}
+		}
+
+
+		
+		
+		
+		
 	}
 	
 	
 	// preveri ali je igre konec, vrne Stanje igre
 	public Stanje stanje() {
 		this.pocisti();
-		DFS(rdeca_zgoraj);
+		BFS(rdeca_spodaj);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_RDEC;
 		this.pocisti();
-		DFS(modra_levo);
+		BFS(modra_desno);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_MODER;		
 		return Stanje.V_TEKU;
 	}

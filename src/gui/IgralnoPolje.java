@@ -41,7 +41,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(750, 500);
+		return new Dimension(850, 500);
 	}
 
 	
@@ -68,6 +68,13 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		if (p == Igralec.Rdec) g2.setColor(Color.RED);
 		else g2.setColor(Color.BLUE);
 		g2.fillOval((int)x, (int)y, (int)d , (int)d);
+		
+		// zadnjega poudari
+		if (Vodja.igra.zadnja != null && Vodja.igra.zadnja.koordinati.getX() == i && Vodja.igra.zadnja.koordinati.getY() == j) {
+			g2.setStroke(new BasicStroke((float) (1.5 * a * LINE_WIDTH)));
+			g2.setColor(Color.ORANGE);
+			g2.drawOval((int)x, (int)y, (int)d, (int)d);
+		}
 	}
 	
 	private int[][] navpicnaCrta(int i, int n) {
@@ -114,7 +121,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return crta;
 	}
 	
-	
 	private int[][] desniModri(int n) {
 		int d = 2 * n + 3;
 		
@@ -142,7 +148,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return crta;
 	}
 	
-	
 	private int[][] vodoravnaCrta(int j, int n) {
 		int d = 2 * n + 1;
 		
@@ -161,7 +166,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		crta[1] = yKoord;
 		return crta;
 	}
-	
 	
 	private int[][] zgorajRdeci(int n) {
 		int d = 2 * n + 3;
@@ -190,7 +194,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return crta;
 	}
 	
-	
 	private int[][] spodajRdeci(int n) {
 		int d = 2 * n + 3;
 		
@@ -217,7 +220,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		crta[1] = yKoord;
 		return crta;
 	}
-	
 	
 	private int[][] sestkotnik(int i, int j) {
 		int[][] sestkotnik = new int[2][6];
