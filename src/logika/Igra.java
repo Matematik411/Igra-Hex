@@ -90,6 +90,7 @@ public class Igra {
 				
 			}
 		}
+
 		this.naPotezi = igra.naPotezi();
 	}
 	
@@ -245,7 +246,7 @@ public class Igra {
 //			}
 //		}
 //	}
-//	
+	
 	// implementiran BFS
 	private void BFS(Tocka zacetek) {
 		Queue q = new Queue();
@@ -305,12 +306,15 @@ public class Igra {
 	
 	// preveri ali je igre konec, vrne Stanje igre
 	public Stanje stanje() {
+		
 		this.pocisti();
 		BFS(rdeca_spodaj);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_RDEC;
+		
 		this.pocisti();
 		BFS(modra_desno);
-		if (this.konec.size() > 0) return Stanje.ZMAGA_MODER;		
+		if (this.konec.size() > 0) return Stanje.ZMAGA_MODER;	
+		
 		return Stanje.V_TEKU;
 	}
 	

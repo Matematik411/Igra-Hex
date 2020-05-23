@@ -37,7 +37,7 @@ public class Inteligenca extends KdoIgra {
 		if (ai == 0) {
 			najboljsaPoteza = minimax(igra, this.globina);
 		} else if (ai == 1) {
-			List<OcenjenaPoteza> ocenjenePoteze = najboljsePoteze(igra, 2);
+			List<OcenjenaPoteza> ocenjenePoteze = najboljsePoteze(igra, this.globina);
 			Random RANDOM = new Random();
 			int i = RANDOM.nextInt(ocenjenePoteze.size());	
 			najboljsaPoteza = ocenjenePoteze.get(i);
@@ -62,7 +62,7 @@ public class Inteligenca extends KdoIgra {
 				System.out.println(kopijaIgre.stanje());
 			}
 			
-			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepre�i
+			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreci
 			switch (kopijaIgre.stanje()) {
 			case ZMAGA_RDEC: 
 			case ZMAGA_MODER: ocena = ZMAGA; break;
@@ -107,10 +107,11 @@ public class Inteligenca extends KdoIgra {
 	
 	//-------------ALPHABETA-----------------
 	public static OcenjenaPoteza alphaBetaMinimax(Igra igra, int globina, int alpha, int beta, Igralec jaz) {
+		
 		int ocena;
 		if (igra.naPotezi() == jaz) {ocena = ZGUBA;} else {ocena = ZMAGA;}
 		List<Koordinati> moznePoteze = igra.poteze();
-		Koordinati najboljsaPoteza = moznePoteze.get(0);
+		Koordinati najboljsaPoteza = moznePoteze.get(0); 
 		
 		for (Koordinati p: moznePoteze) {
 
