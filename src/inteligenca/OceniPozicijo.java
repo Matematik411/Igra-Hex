@@ -14,11 +14,11 @@ public class OceniPozicijo {
 	
 	
 	
-	private static Pot oceni_rdec(Igra igra) {
+	public static Pot oceni_rdec(Igra igra) {
 		Tocka[][] plosca = igra.getPlosca();
 		int N = plosca[0].length;
 		
-		Set<Koordinati> rdeca_pot = new HashSet<Koordinati>();
+		Set<Vrednost> rdeca_pot = new HashSet<Vrednost>();
 		Vrednost[][] tabela_dolzin_rdeci =  new Vrednost[N][N];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -68,20 +68,31 @@ public class OceniPozicijo {
 				
 				
 				Vrednost pointer = null;
+				Skok skok = null;
 				int vrednost_polja;
 				vrednost_polja = Math.min(levo_levo_zg, Math.min(levo_zg, Math.min(desno_zg, Math.min(desno_desno_zg, zgoraj))));
 				
 				if (vrednost_polja != Integer.MAX_VALUE) {
-					if (vrednost_polja == levo_levo_zg) pointer = tabela_dolzin_rdeci[i - 1][j - 1];
+					if (vrednost_polja == levo_levo_zg) {
+						pointer = tabela_dolzin_rdeci[i - 1][j - 1];
+						skok = Skok.Skok1;
+					}
 					if (vrednost_polja == levo_zg) pointer = tabela_dolzin_rdeci[i - 1][j];
-					if (vrednost_polja == desno_desno_zg) pointer = tabela_dolzin_rdeci[i - 1][j + 2];
+					if (vrednost_polja == desno_desno_zg) {
+						pointer = tabela_dolzin_rdeci[i - 1][j + 2];
+						skok = Skok.Skok3;
+					}
 					if (vrednost_polja == desno_zg) pointer = tabela_dolzin_rdeci[i - 1][j + 1];
-					if (vrednost_polja == zgoraj) pointer = tabela_dolzin_rdeci[i - 2][j + 1];
+					if (vrednost_polja == zgoraj) {
+						pointer = tabela_dolzin_rdeci[i - 2][j + 1];
+						skok = Skok.Skok2;
+					}
 					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja += 1;
 					if (plosca[i][j].polje == Polje.Moder) vrednost_polja = Integer.MAX_VALUE;
 				}
 				tabela_dolzin_rdeci[i][j].vrednost = vrednost_polja;
 				tabela_dolzin_rdeci[i][j].pointer = pointer;
+				tabela_dolzin_rdeci[i][j].skok = skok;
 			}
 			
 			
@@ -91,7 +102,9 @@ public class OceniPozicijo {
 				int desno;
 				int vrednost_polja = tabela_dolzin_rdeci[i][j].vrednost;
 				Vrednost pointer = tabela_dolzin_rdeci[i][j].pointer;
+				Skok skok = tabela_dolzin_rdeci[i][j].skok;
 				Vrednost nov_pointer = pointer;
+				
 				
 				try { levo = tabela_dolzin_rdeci[i][j - 1].vrednost; } 
 				catch (ArrayIndexOutOfBoundsException e) { levo = Integer.MAX_VALUE; }
@@ -102,14 +115,17 @@ public class OceniPozicijo {
 					if (plosca[i][j].polje == Polje.Rdec) vrednost_polja = levo;
 					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = levo + 1;
 					nov_pointer = tabela_dolzin_rdeci[i][j - 1];
+					skok = null;
 				}
 				if (desno != Integer.MAX_VALUE && desno < vrednost_polja) {
 					if (plosca[i][j].polje == Polje.Rdec) vrednost_polja = desno;
 					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = desno + 1;
 					nov_pointer = tabela_dolzin_rdeci[i][j + 1];
+					skok = null;
 				}
 				tabela_dolzin_rdeci[i][j].vrednost = vrednost_polja;
 				tabela_dolzin_rdeci[i][j].pointer = nov_pointer;
+				tabela_dolzin_rdeci[i][j].skok = skok;
 			}
 		}
 		
@@ -128,7 +144,7 @@ public class OceniPozicijo {
 		// Izracun poti
 		Vrednost spremenljivka = pointer_rdeca;
 		while (spremenljivka != null) {
-			rdeca_pot.add(spremenljivka.koordinati);
+			rdeca_pot.add(spremenljivka);
 			spremenljivka = spremenljivka.pointer;
 		}
 		
@@ -136,11 +152,11 @@ public class OceniPozicijo {
 	}
 	
 	
-	private static Pot oceni_moder(Igra igra) {
+	public static Pot oceni_moder(Igra igra) {
 		Tocka[][] plosca = igra.getPlosca();
 		int N = plosca[0].length;
 		
-		Set<Koordinati> modra_pot = new HashSet<Koordinati>();
+		Set<Vrednost> modra_pot = new HashSet<Vrednost>();
 		Vrednost[][] tabela_dolzin_modri =  new Vrednost[N][N];
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -190,20 +206,31 @@ public class OceniPozicijo {
 				
 				
 				Vrednost pointer = null;
+				Skok skok = null;
 				int vrednost_polja;
 				vrednost_polja = Math.min(gor_gor_lev, Math.min(gor_lev, Math.min(dol_lev, Math.min(dol_dol_lev, levo))));
 				
 				if (vrednost_polja != Integer.MAX_VALUE) {
-					if (vrednost_polja == gor_gor_lev) pointer = tabela_dolzin_modri[i - 1][j - 1];
+					if (vrednost_polja == gor_gor_lev) {
+						pointer = tabela_dolzin_modri[i - 1][j - 1];
+						skok = Skok.Skok1;
+					}
 					if (vrednost_polja == gor_lev) pointer = tabela_dolzin_modri[i][j - 1];
 					if (vrednost_polja == dol_lev) pointer = tabela_dolzin_modri[i + 1][j - 1];
-					if (vrednost_polja == dol_dol_lev) pointer = tabela_dolzin_modri[i + 2][j - 1];
-					if (vrednost_polja == levo) pointer = tabela_dolzin_modri[i + 1][j - 2];
+					if (vrednost_polja == dol_dol_lev) {
+						pointer = tabela_dolzin_modri[i + 2][j - 1];
+						skok = Skok.Skok3;
+					}
+					if (vrednost_polja == levo) {
+						pointer = tabela_dolzin_modri[i + 1][j - 2];
+						skok = Skok.Skok2;
+					}
 					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja += 1;
 					if (plosca[i][j].polje == Polje.Rdec) vrednost_polja = Integer.MAX_VALUE;
 				}
 				tabela_dolzin_modri[i][j].vrednost = vrednost_polja;
 				tabela_dolzin_modri[i][j].pointer = pointer;
+				tabela_dolzin_modri[i][j].skok = skok;
 			}
 			
 			
@@ -213,6 +240,7 @@ public class OceniPozicijo {
 				int dol;
 				int vrednost_polja = tabela_dolzin_modri[i][j].vrednost;
 				Vrednost pointer = tabela_dolzin_modri[i][j].pointer;
+				Skok skok = tabela_dolzin_modri[i][j].skok;
 				Vrednost nov_pointer = pointer;
 				
 				try { gor = tabela_dolzin_modri[i - 1][j].vrednost; } 
@@ -224,14 +252,17 @@ public class OceniPozicijo {
 					if (plosca[i][j].polje == Polje.Moder) vrednost_polja = dol;
 					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = dol + 1;
 					nov_pointer = tabela_dolzin_modri[i + 1][j];
+					skok = null;
 				}
 				if (gor != Integer.MAX_VALUE && gor < vrednost_polja) {
 					if (plosca[i][j].polje == Polje.Moder) vrednost_polja = gor;
 					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = gor + 1;
 					nov_pointer = tabela_dolzin_modri[i - 1][j];
+					skok = null;
 				}
 				tabela_dolzin_modri[i][j].vrednost = vrednost_polja;
 				tabela_dolzin_modri[i][j].pointer = nov_pointer;
+				tabela_dolzin_modri[i][j].skok = skok;
 			}
 		}
 		
@@ -250,7 +281,7 @@ public class OceniPozicijo {
 		// Izracun poti
 		Vrednost spremenljivka = pointer_modra;
 		while (spremenljivka != null) {
-			modra_pot.add(spremenljivka.koordinati);
+			modra_pot.add(spremenljivka);
 			spremenljivka = spremenljivka.pointer;
 		}
 		

@@ -1,7 +1,10 @@
 package inteligenca;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import logika.Igra;
 import logika.Igralec;
@@ -19,7 +22,7 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("Rehoboam");
-		this.globina = 3;
+		this.globina = 5;
 		this.ai = 2;
 	}
 	
@@ -107,7 +110,8 @@ public class Inteligenca extends KdoIgra {
 		
 		int ocena;
 		if (igra.naPotezi() == jaz) {ocena = ZGUBA;} else {ocena = ZMAGA;}
-		List<Koordinati> moznePoteze = igra.poteze();
+		List<Koordinati> moznePoteze = IzbiraPotez.izbiraPotezVse(igra, jaz, globina);	
+		List<Koordinati> najbolsePoteze = new LinkedList<Koordinati>();
 		Koordinati najboljsaPoteza = moznePoteze.get(0); 
 		
 		for (Koordinati p: moznePoteze) {
@@ -140,17 +144,23 @@ public class Inteligenca extends KdoIgra {
 			
 		
 			if (igra.naPotezi() == jaz) {
-				if (ocenaPoteze > ocena) {
+				if (ocenaPoteze == ocena) najbolsePoteze.add(p);
+				else if (ocenaPoteze > ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
+					najbolsePoteze.clear();
+					najbolsePoteze.add(p);
 					alpha = Math.max(ocena, alpha);
 				}
 			}
 			
 			else {
-				if (ocenaPoteze < ocena) {
+				if (ocenaPoteze == ocena) najbolsePoteze.add(p);
+				else if (ocenaPoteze < ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
+					najbolsePoteze.clear();
+					najbolsePoteze.add(p);
 					beta = Math.min(ocena, beta);
 				}
 			}
@@ -158,9 +168,16 @@ public class Inteligenca extends KdoIgra {
 			if (alpha >= beta) return new OcenjenaPoteza(najboljsaPoteza, ocena);
 		
 		}
-
+		
+		Random RANDOM = new Random();
+		int i = RANDOM.nextInt(najbolsePoteze.size());
+		najboljsaPoteza = najbolsePoteze.get(i);
+		
 		return new OcenjenaPoteza(najboljsaPoteza, ocena);
 	}
+
+
+
 	
 	
 
