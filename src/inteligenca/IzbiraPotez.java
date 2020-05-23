@@ -26,7 +26,9 @@ public class IzbiraPotez {
 		for (Koordinati koordinate : seznam) {
 			int i = koordinate.getY();
 			int j = koordinate.getX();
-			if (plosca[i][j].polje == Polje.PRAZNO) prazne.add(koordinate);
+			try {
+				 if (plosca[i][j].polje == Polje.PRAZNO) prazne.add(koordinate);
+			} catch (ArrayIndexOutOfBoundsException e) {}
 		}
 		
 		return prazne;
