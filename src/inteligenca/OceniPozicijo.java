@@ -90,7 +90,6 @@ public class OceniPozicijo {
 				int levo;
 				int desno;
 				int vrednost_polja = tabela_dolzin_rdeci[i][j].vrednost;
-				int nova_vrednost = vrednost_polja;
 				Vrednost pointer = tabela_dolzin_rdeci[i][j].pointer;
 				Vrednost nov_pointer = pointer;
 				
@@ -99,15 +98,17 @@ public class OceniPozicijo {
 				try { desno = tabela_dolzin_rdeci[i][j + 1].vrednost; } 
 				catch (ArrayIndexOutOfBoundsException e) { desno = Integer.MAX_VALUE; }
 				
-				if (levo != Integer.MAX_VALUE && levo + 1 < vrednost_polja) {
-					nova_vrednost = levo + 1;
+				if (levo != Integer.MAX_VALUE && levo < vrednost_polja) {
+					if (plosca[i][j].polje == Polje.Rdec) vrednost_polja = levo;
+					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = levo + 1;
 					nov_pointer = tabela_dolzin_rdeci[i][j - 1];
 				}
-				if (desno != Integer.MAX_VALUE && desno + 1 < vrednost_polja) {
-					nova_vrednost = desno + 1;
+				if (desno != Integer.MAX_VALUE && desno < vrednost_polja) {
+					if (plosca[i][j].polje == Polje.Rdec) vrednost_polja = desno;
+					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = desno + 1;
 					nov_pointer = tabela_dolzin_rdeci[i][j + 1];
 				}
-				tabela_dolzin_rdeci[i][j].vrednost = nova_vrednost;
+				tabela_dolzin_rdeci[i][j].vrednost = vrednost_polja;
 				tabela_dolzin_rdeci[i][j].pointer = nov_pointer;
 			}
 		}
@@ -148,9 +149,9 @@ public class OceniPozicijo {
 		}
 		
 		// 1. vrstica
-		for (int j = 0; j < N; j++) {
-			if (plosca[j][0].polje == Polje.Moder) tabela_dolzin_modri[j][0].vrednost = 0;
-			if (plosca[j][0].polje == Polje.PRAZNO) tabela_dolzin_modri[j][0].vrednost = 1;
+		for (int i = 0; i < N; i++) {
+			if (plosca[i][0].polje == Polje.Moder) tabela_dolzin_modri[i][0].vrednost = 0;
+			if (plosca[i][0].polje == Polje.PRAZNO) tabela_dolzin_modri[i][0].vrednost = 1;
 		}
 		
 		// ostalo
@@ -211,7 +212,6 @@ public class OceniPozicijo {
 				int gor;
 				int dol;
 				int vrednost_polja = tabela_dolzin_modri[i][j].vrednost;
-				int nova_vrednost = vrednost_polja;
 				Vrednost pointer = tabela_dolzin_modri[i][j].pointer;
 				Vrednost nov_pointer = pointer;
 				
@@ -220,33 +220,35 @@ public class OceniPozicijo {
 				try { dol = tabela_dolzin_modri[i + 1][j].vrednost; } 
 				catch (ArrayIndexOutOfBoundsException e) { dol = Integer.MAX_VALUE; }
 				
-				if (dol != Integer.MAX_VALUE && dol + 1 < vrednost_polja) {
-					nova_vrednost = dol + 1;
+				if (dol != Integer.MAX_VALUE && dol < vrednost_polja) {
+					if (plosca[i][j].polje == Polje.Moder) vrednost_polja = dol;
+					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = dol + 1;
 					nov_pointer = tabela_dolzin_modri[i + 1][j];
 				}
-				if (gor != Integer.MAX_VALUE && gor + 1 < vrednost_polja) {
-					nova_vrednost = gor + 1;
+				if (gor != Integer.MAX_VALUE && gor < vrednost_polja) {
+					if (plosca[i][j].polje == Polje.Moder) vrednost_polja = gor;
+					if (plosca[i][j].polje == Polje.PRAZNO) vrednost_polja = gor + 1;
 					nov_pointer = tabela_dolzin_modri[i - 1][j];
 				}
-				tabela_dolzin_modri[i][j].vrednost = nova_vrednost;
+				tabela_dolzin_modri[i][j].vrednost = vrednost_polja;
 				tabela_dolzin_modri[i][j].pointer = nov_pointer;
 			}
 		}
 		
 		// Koncna vrednost
 		int najmanjsa_modra = Integer.MAX_VALUE;
-		Vrednost pointer_rdeca = null;
+		Vrednost pointer_modra = null;
 		for (int i = 0; i < N; i++) {
 			int vrednost = tabela_dolzin_modri[i][N - 1].vrednost;
 			if (najmanjsa_modra > vrednost) {
 				najmanjsa_modra = vrednost;
-				pointer_rdeca = tabela_dolzin_modri[i][N - 1];
+				pointer_modra = tabela_dolzin_modri[i][N - 1];
 			}	
 		}
 		
 	
 		// Izracun poti
-		Vrednost spremenljivka = pointer_rdeca;
+		Vrednost spremenljivka = pointer_modra;
 		while (spremenljivka != null) {
 			modra_pot.add(spremenljivka.koordinati);
 			spremenljivka = spremenljivka.pointer;
@@ -265,12 +267,12 @@ public class OceniPozicijo {
 		int vrednost_modri = oceni_moder(igra).vrednost;
 		
 		int a = Integer.MAX_VALUE / (N * N);
-		int b = Integer.MIN_VALUE / (N * N);
+		int b = -a;
 	
 		if (jaz == Igralec.Rdec) {
 			if (vrednost_modri == Integer.MAX_VALUE) return Integer.MAX_VALUE;
 			if (vrednost_rdeci == Integer.MAX_VALUE) return Integer.MIN_VALUE;
-			return - (a * vrednost_rdeci + b * vrednost_modri );
+			return -(a * vrednost_rdeci + b * vrednost_modri );
 		}
 		else {
 			if (vrednost_modri == Integer.MAX_VALUE) return Integer.MIN_VALUE;

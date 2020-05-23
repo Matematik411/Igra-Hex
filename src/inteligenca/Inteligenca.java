@@ -19,8 +19,8 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("Rehoboam");
-		this.globina = 4;
-		this.ai = 0;
+		this.globina = 3;
+		this.ai = 2;
 	}
 	
 	
@@ -37,7 +37,7 @@ public class Inteligenca extends KdoIgra {
 		if (ai == 0) {
 			najboljsaPoteza = minimax(igra, this.globina);
 		} else if (ai == 1) {
-			List<OcenjenaPoteza> ocenjenePoteze = najboljsePoteze(igra, 2);
+			List<OcenjenaPoteza> ocenjenePoteze = najboljsePoteze(igra, this.globina);
 			Random RANDOM = new Random();
 			int i = RANDOM.nextInt(ocenjenePoteze.size());	
 			najboljsaPoteza = ocenjenePoteze.get(i);
