@@ -19,8 +19,8 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("Rehoboam");
-		this.globina = 4;
-		this.ai = 0;
+		this.globina = 3;
+		this.ai = 2;
 	}
 	
 	
