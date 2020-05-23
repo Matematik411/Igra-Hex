@@ -14,7 +14,7 @@ import splosno.Koordinati;
 public class Igra {
 	
 	// Standardna velikost igralne plošèe je 11x11
-	public static int N = 7;
+	public static int N = 9;
 	
 	// Zmagovalna èrta
 	public Set<Tocka> konec;
@@ -33,7 +33,6 @@ public class Igra {
 	private Tocka rdeca_spodaj = new Tocka(new Koordinati(N, 0), Polje.Rdec);
 	private Tocka modra_levo = new Tocka(new Koordinati(0, -1), Polje.Moder);
 	private Tocka modra_desno = new Tocka(new Koordinati(0, N), Polje.Moder);
-	
 
 	
 	// Igralec, ki je trenutno na potezi.
@@ -307,13 +306,13 @@ public class Igra {
 	// preveri ali je igre konec, vrne Stanje igre
 	public Stanje stanje() {
 		
-		this.pocisti();
 		BFS(rdeca_spodaj);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_RDEC;
 		
 		this.pocisti();
 		BFS(modra_desno);
 		if (this.konec.size() > 0) return Stanje.ZMAGA_MODER;	
+		this.pocisti();
 		
 		return Stanje.V_TEKU;
 	}

@@ -58,9 +58,6 @@ public class Inteligenca extends KdoIgra {
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
 			int ocena;
-			if (kopijaIgre.stanje() != Stanje.V_TEKU) {
-				System.out.println(kopijaIgre.stanje());
-			}
 			
 			// ne zazna primera, ko bi nasprotnik zmagal v eni potezi in zato tega ne prepreci
 			switch (kopijaIgre.stanje()) {
@@ -119,15 +116,20 @@ public class Inteligenca extends KdoIgra {
 			kopijaIgre.odigraj(p);
 			int ocenaPoteze;
 			
-			if (kopijaIgre.stanje() != Stanje.V_TEKU) {
-				System.out.println(kopijaIgre.stanje());
-			}
 
 			switch (kopijaIgre.stanje()) {
 			
-			case ZMAGA_RDEC: ocenaPoteze = (jaz == Igralec.Rdec ? ZMAGA : ZGUBA); break;
+			case ZMAGA_RDEC: {
+				System.out.println("Rdeci-zmaga");
+				ocenaPoteze = (jaz == Igralec.Rdec ? ZMAGA : ZGUBA);
+				break;
+			}
 			
-			case ZMAGA_MODER: ocenaPoteze = (jaz == Igralec.Moder ? ZMAGA : ZGUBA); break;
+			case ZMAGA_MODER: {
+				System.out.println("Modri-zmaga");
+				ocenaPoteze = (jaz == Igralec.Moder ? ZMAGA : ZGUBA); 				
+				break;
+			}
 			
 			default:
 				// nekdo je na potezi
@@ -136,10 +138,6 @@ public class Inteligenca extends KdoIgra {
 				else ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
 			}
 			
-//			if (ocenaPoteze < 0 || ocenaPoteze > 1000) {
-//				System.out.println(ocenaPoteze);
-//				System.out.println(ocena);
-//			}
 		
 			if (igra.naPotezi() == jaz) {
 				if (ocenaPoteze > ocena) {
