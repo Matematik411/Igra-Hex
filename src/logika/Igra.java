@@ -70,6 +70,7 @@ public class Igra {
 		this.rdece = new HashSet<Tocka>();
 		this.modre = new HashSet<Tocka>();
 		this.plosca = new Tocka[N][N];
+		Koordinati z = igra.zadnja.koordinati;
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				this.plosca[i][j] = new Tocka(igra.plosca[i][j].koordinati, igra.plosca[i][j].polje);
@@ -86,6 +87,7 @@ public class Igra {
 					t.polje = Polje.PRAZNO;
 					odigraj(t.koordinati, p);
 				}
+				if (z == new Koordinati(z.getX(), z.getY())) this.zadnja = t;
 				
 			}
 		}
