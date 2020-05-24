@@ -1,5 +1,6 @@
 package inteligenca;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -40,10 +41,25 @@ public class IzbiraPotez {
 		Tocka[][] plosca = igra.getPlosca();
 		Tocka zadnja = igra.zadnja;
 		
-		Pot potOcena;
+		Pot potOcena = new Pot(1, new HashSet<Vrednost>());
+		Set<Vrednost> pot;
 		if (igralec == Igralec.Moder) { 
-			potOcena = OceniPozicijo.oceni_moder(igra); 
-			Set<Vrednost> pot = potOcena.najbolsa_pot;
+			if (Inteligenca.nacinLokalno) {
+				potOcena = OceniPozicijo.oceni_moder(igra); 
+				pot = potOcena.najbolsa_pot;
+			}
+			else {
+				pot = potOcena.najbolsa_pot;
+			}
+
+			if (pot.size() == 0) {
+				potOcena.vrednost = 1;
+				Inteligenca.nacinLokalno = false;
+				List<Koordinati> modra_pot = BfsIskanje.BfsIskanjePotiModer(igra);
+				for (Koordinati koordinata : modra_pot) {
+					pot.add(new Vrednost(koordinata));
+				}
+			}
 			int vrednost = potOcena.vrednost;
 			
 			if (vrednost == 0) {
@@ -143,8 +159,22 @@ public class IzbiraPotez {
 		}
 		
 		if (igralec == Igralec.Rdec) { 
-			potOcena = OceniPozicijo.oceni_rdec(igra);
-			Set<Vrednost> pot = potOcena.najbolsa_pot;
+			if (Inteligenca.nacinLokalno) {
+				potOcena = OceniPozicijo.oceni_rdec(igra); 
+				pot = potOcena.najbolsa_pot;
+			}
+			else {
+				pot = potOcena.najbolsa_pot;
+			}
+
+			if (pot.size() == 0) {
+				potOcena.vrednost = 1;
+				Inteligenca.nacinLokalno = false;
+				List<Koordinati> modra_pot = BfsIskanje.BfsIskanjePotiRdec(igra);
+				for (Koordinati koordinata : modra_pot) {
+					pot.add(new Vrednost(koordinata));
+				}
+			}
 			int vrednost = potOcena.vrednost;
 			
 			if (vrednost == 0) {

@@ -293,10 +293,18 @@ public class OceniPozicijo {
 	
 	public static int oceniPozicijo(Igra igra, Igralec jaz) {
 		int N = igra.velikost;
+		int vrednost_rdeci;
+		int vrednost_modri;
 
-		int vrednost_rdeci = oceni_rdec(igra).vrednost;
-		int vrednost_modri = oceni_moder(igra).vrednost;
-		
+		if (Inteligenca.nacinLokalno == true) {
+			vrednost_rdeci = oceni_rdec(igra).vrednost;
+			vrednost_modri = oceni_moder(igra).vrednost;	
+		}
+		else {
+			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
+			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
+		}
+
 		int a = Integer.MAX_VALUE / (N * N);
 		int b = -a;
 	

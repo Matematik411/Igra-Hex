@@ -17,18 +17,21 @@ public class Inteligenca extends KdoIgra {
 	
 	private static final int ZMAGA = Integer.MAX_VALUE; // vrednost ob zmagi
 	private static final int ZGUBA = -ZMAGA;
-	private int globina;
+	private static int glob;
 	private int ai;
+	public static boolean nacinLokalno = true;
+	public static boolean nacinGlobalno;
 	
 	public Inteligenca() {
 		super("Rehoboam");
-		this.globina = 5;
+		this.glob = 7;
 		this.ai = 2;
+		this.nacinGlobalno = true;
 	}
 	
 	
 	public void nastaviGlobino(int d) {
-		this.globina = d;
+		this.glob = d;
 	}
 	
 	public void nastaviAI(int i) {
@@ -38,14 +41,14 @@ public class Inteligenca extends KdoIgra {
 	public Koordinati izberiPotezo (Igra igra) {
 		OcenjenaPoteza najboljsaPoteza;
 		if (ai == 0) {
-			najboljsaPoteza = minimax(igra, this.globina);
+			najboljsaPoteza = minimax(igra, this.glob);
 		} else if (ai == 1) {
-			List<OcenjenaPoteza> ocenjenePoteze = najboljsePoteze(igra, this.globina);
+			List<OcenjenaPoteza> ocenjenePoteze = najboljsePoteze(igra, this.glob);
 			Random RANDOM = new Random();
 			int i = RANDOM.nextInt(ocenjenePoteze.size());	
 			najboljsaPoteza = ocenjenePoteze.get(i);
 		} else {
-			najboljsaPoteza = alphaBetaMinimax(igra, this.globina, ZGUBA, ZMAGA, igra.naPotezi());
+			najboljsaPoteza = alphaBetaMinimax(igra, this.glob, ZGUBA, ZMAGA, igra.naPotezi());
 		}
 		return najboljsaPoteza.poteza;
 	}
@@ -115,10 +118,15 @@ public class Inteligenca extends KdoIgra {
 		if (igra.naPotezi() == jaz) {ocena = ZGUBA;} else {ocena = ZMAGA;}
 		List<Koordinati> moznePoteze = IzbiraPotez.izbiraPotezVse(igra, jaz, globina);	
 		
+		if (globina == glob && !nacinLokalno) nacinGlobalno = false;
+		if (globina == 1 && nacinGlobalno) nacinLokalno = true;
+		
 		if (moznePoteze.size() == 0) {
 			moznePoteze = igra.poteze();
 			if (globina > 3) globina = 3;
 		}
+		
+		if (!nacinLokalno) System.out.println("DA");
 		
 		//List<Koordinati> najbolsePoteze = new LinkedList<Koordinati>();
 		Koordinati najboljsaPoteza = moznePoteze.get(0); 
