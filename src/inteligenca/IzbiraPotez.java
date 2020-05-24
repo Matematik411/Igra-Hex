@@ -122,7 +122,6 @@ public class IzbiraPotez {
 				seznam.add(new Koordinati(j - 1, i + 1));
 				seznam.add(new Koordinati(j + 1, i - 1));
 				seznam.add(new Koordinati(j, i + 1));
-				seznam.add(new Koordinati(j, i + 1));
 				
 				if (globina > 0) {
 					seznam.add(new Koordinati(j + 1, i));
@@ -222,14 +221,13 @@ public class IzbiraPotez {
 				
 				
 				seznam.add(new Koordinati(j + 1, i));
-				seznam.add(new Koordinati(j, i - 1));
 				seznam.add(new Koordinati(j - 1, i + 1));
 				seznam.add(new Koordinati(j - 1, i));
 				seznam.add(new Koordinati(j + 1, i - 1));
 				
 				if (globina > 0) {
 				seznam.add(new Koordinati(j, i + 1));
-				seznam.add(new Koordinati(j, i + 1));
+				seznam.add(new Koordinati(j, i - 1));
 				}
 				if (globina > 0) {
 					seznam.add(new Koordinati(j - 2, i + 1));
