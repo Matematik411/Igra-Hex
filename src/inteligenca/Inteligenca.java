@@ -111,7 +111,7 @@ public class Inteligenca extends KdoIgra {
 		int ocena;
 		if (igra.naPotezi() == jaz) {ocena = ZGUBA;} else {ocena = ZMAGA;}
 		List<Koordinati> moznePoteze = IzbiraPotez.izbiraPotezVse(igra, jaz, globina);	
-		List<Koordinati> najbolsePoteze = new LinkedList<Koordinati>();
+		//List<Koordinati> najbolsePoteze = new LinkedList<Koordinati>();
 		Koordinati najboljsaPoteza = moznePoteze.get(0); 
 		
 		for (Koordinati p: moznePoteze) {
@@ -144,23 +144,23 @@ public class Inteligenca extends KdoIgra {
 			
 		
 			if (igra.naPotezi() == jaz) {
-				if (ocenaPoteze == ocena) najbolsePoteze.add(p);
+				if (ocenaPoteze == ocena) {}//najbolsePoteze.add(p);
 				else if (ocenaPoteze > ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
-					najbolsePoteze.clear();
-					najbolsePoteze.add(p);
+					//najbolsePoteze.clear();
+					//najbolsePoteze.add(p);
 					alpha = Math.max(ocena, alpha);
 				}
 			}
 			
 			else {
-				if (ocenaPoteze == ocena) najbolsePoteze.add(p);
+				if (ocenaPoteze == ocena) {}//najbolsePoteze.add(p);
 				else if (ocenaPoteze < ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
-					najbolsePoteze.clear();
-					najbolsePoteze.add(p);
+					//najbolsePoteze.clear();
+					//najbolsePoteze.add(p);
 					beta = Math.min(ocena, beta);
 				}
 			}
@@ -169,9 +169,9 @@ public class Inteligenca extends KdoIgra {
 		
 		}
 		
-		Random RANDOM = new Random();
-		int i = RANDOM.nextInt(najbolsePoteze.size());
-		najboljsaPoteza = najbolsePoteze.get(i);
+		//Random RANDOM = new Random();
+		//int i = RANDOM.nextInt(najbolsePoteze.size());
+		//najboljsaPoteza = najbolsePoteze.get(i);
 		
 		return new OcenjenaPoteza(najboljsaPoteza, ocena);
 	}
