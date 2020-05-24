@@ -14,8 +14,8 @@ import splosno.Koordinati;
 public class Igra {
 	
 	// Standardna velikost igralne plošèe je 11x11
-	public static int N = 9;
-	
+	public static int N = 5;
+
 	// Zmagovalna èrta
 	public Set<Tocka> konec;
 	public int velikost;

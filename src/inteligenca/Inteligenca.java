@@ -22,8 +22,8 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("Rehoboam");
-		this.globina = 7;
-		this.ai = 2;
+		this.globina = 3;
+		this.ai = 0;
 	}
 	
 	
@@ -54,7 +54,9 @@ public class Inteligenca extends KdoIgra {
 	// vrne najboljso ocenjeno potezo z vidika igralca na potezi
 	public OcenjenaPoteza minimax(Igra igra, int globina) {
 		OcenjenaPoteza najboljsaPoteza = null;
-		List<Koordinati> moznePoteze = igra.poteze();
+		
+		// TU SPREMENIL
+		List<Koordinati> moznePoteze = BfsIskanje.BfsIskanjePoti(igra, igra.naPotezi());
 		
 		for (Koordinati p: moznePoteze) {
 
