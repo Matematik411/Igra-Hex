@@ -107,6 +107,7 @@ public class Inteligenca extends KdoIgra {
 	
 	//-------------ALPHABETA-----------------
 	public static OcenjenaPoteza alphaBetaMinimax(Igra igra, int globina, int alpha, int beta, Igralec jaz) {
+		if (igra.zadnja == null) return new OcenjenaPoteza(new Koordinati(igra.velikost / 2, igra.velikost / 2), 0);
 		
 		int ocena;
 		if (igra.naPotezi() == jaz) {ocena = ZGUBA;} else {ocena = ZMAGA;}

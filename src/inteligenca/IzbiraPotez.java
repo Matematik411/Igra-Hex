@@ -51,8 +51,6 @@ public class IzbiraPotez {
 					int j = vre.koordinati.getX();
 					int i = vre.koordinati.getY();
 					
-					// PRVA ÈRTA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					
 					if (vre.skok == Skok.Skok1) {
 						Tocka Tocka1 = plosca[i][j - 1];
 						Tocka Tocka2 = plosca[i - 1][j];
