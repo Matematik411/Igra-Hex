@@ -22,8 +22,8 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("Rehoboam");
-		this.globina = 3;
-		this.ai = 0;
+		this.globina = 5;
+		this.ai = 2;
 	}
 	
 	
@@ -114,6 +114,12 @@ public class Inteligenca extends KdoIgra {
 		int ocena;
 		if (igra.naPotezi() == jaz) {ocena = ZGUBA;} else {ocena = ZMAGA;}
 		List<Koordinati> moznePoteze = IzbiraPotez.izbiraPotezVse(igra, jaz, globina);	
+		
+		if (moznePoteze.size() == 0) {
+			moznePoteze = igra.poteze();
+			if (globina > 3) globina = 3;
+		}
+		
 		//List<Koordinati> najbolsePoteze = new LinkedList<Koordinati>();
 		Koordinati najboljsaPoteza = moznePoteze.get(0); 
 		
