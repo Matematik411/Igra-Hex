@@ -190,6 +190,11 @@ public class Igra {
 		for (Tocka t : this.zadnja.sosedje) {
 			t.sosedje.remove(this.zadnja);
 		}
+		if (this.zadnja.polje == Polje.Rdec) {
+			this.rdece.remove(this.zadnja);
+		} 
+		else this.modre.remove(this.zadnja);
+		
 		this.plosca[this.zadnja.koordinati.getY()][this.zadnja.koordinati.getX()] 
 				= new Tocka(this.zadnja.koordinati);
 		this.naPotezi = this.naPotezi.nasprotnik();

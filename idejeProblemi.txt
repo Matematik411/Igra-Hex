@@ -34,6 +34,11 @@ vrne mnozico/seznam najboljsih potez, ki jih bova nato v minimaxu imela kot Mozn
 -_-_-_- s tem se nato dela minimax. :) xD :P B)
 
 
+----------____________________________________-----------------------
+
+NAREJENO LEPO :)
+Se urejanje kode, brisanje nepotrebnega, torej tudi te datoteke.... 
+
 
 
 

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import vodja.Vodja;
@@ -44,10 +45,11 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	
 	private JButton menjaj;
 	private JButton razveljavi;
+	private JMenuItem navodila;
 
 	//private JMenuItem imeRdecega;
 	//private JMenuItem imeModrega;
-	private JMenuItem v5, v6, v7, v8, v9, v10, v11, v12, v13;
+	private JMenuItem v7, v9, v11, v13;
 
 	// ustvari igro
 	public GlavnoOkno() {
@@ -82,44 +84,26 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		JMenu nastavitve = new JMenu("Nastavitve");
 		menu_bar.add(nastavitve);
 		
-//		imeRdecega = new JMenuItem("Nastavi ime rdecega");
-//		nastavitve.add(imeRdecega);
-//		imeRdecega.addActionListener(this);
-//		
-//		imeModrega = new JMenuItem("Nastavi ime modrega");
-//		nastavitve.add(imeModrega);
-//		imeModrega.addActionListener(this);
-		
 		JMenu velikostIgre = new JMenu("Nastavi velikost igralne mreze");
 		nastavitve.add(velikostIgre);
 		
-		v5 = new JMenuItem("5");
-		velikostIgre.add(v5);
-		v5.addActionListener(this);
-		v6 = new JMenuItem("6");
-		velikostIgre.add(v6);
-		v6.addActionListener(this);
+
 		v7 = new JMenuItem("7");
 		velikostIgre.add(v7);
 		v7.addActionListener(this);
-		v8 = new JMenuItem("8");
-		velikostIgre.add(v8);
-		v8.addActionListener(this);
 		v9 = new JMenuItem("9");
 		velikostIgre.add(v9);
 		v9.addActionListener(this);
-		v10 = new JMenuItem("10");
-		velikostIgre.add(v10);
-		v10.addActionListener(this);
 		v11 = new JMenuItem("11");
 		velikostIgre.add(v11);
 		v11.addActionListener(this);
-		v12 = new JMenuItem("12");
-		velikostIgre.add(v12);
-		v12.addActionListener(this);
 		v13 = new JMenuItem("13");
 		velikostIgre.add(v13);
 		v13.addActionListener(this);
+		
+		navodila = new JMenuItem("o igri");
+		nastavitve.add(navodila);
+		navodila.addActionListener(this);
 
 		// igralno polje
 		polje = new IgralnoPolje();
@@ -163,7 +147,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 
 	}
 	
-	
+	String opisIgre = "tu napiseva ker zeliva o igri";
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -203,23 +187,15 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			Vodja.menjajBarvo();
 		} else if (e.getSource() == razveljavi) {
 			Vodja.razveljaviPotezo();
+		} else if (e.getSource() == navodila) {
+			JOptionPane.showMessageDialog(null, opisIgre);
 		} else {
-			if (e.getSource() == v5) {
-				Igra.N = 5;
-			} else if (e.getSource() == v6) {
-				Igra.N = 6;
-			} else if (e.getSource() == v7) {
+			if (e.getSource() == v7) {
 				Igra.N = 7;
-			} else if (e.getSource() == v8) {
-				Igra.N = 8;
 			} else if (e.getSource() == v9) {
 				Igra.N = 9;
-			} else if (e.getSource() == v10) {
-				Igra.N = 10;
 			} else if (e.getSource() == v11) {
 				Igra.N = 11;
-			} else if (e.getSource() == v12) {
-				Igra.N = 12;
 			} else if (e.getSource() == v13) {
 				Igra.N = 13;
 			}
@@ -231,6 +207,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	
 	// GUI = graphical user interface
 	public void osveziGUI() {
+		menjaj.setVisible(false);
+		razveljavi.setVisible(false);
 		if (Vodja.igra == null) {
 			status.setText("Igra ni v teku.");
 		}
@@ -239,28 +217,27 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			case V_TEKU: 
 				status.setText("Na potezi je " + Vodja.igra.naPotezi() + 
 						" - " + Vodja.kdoIgra.get(Vodja.igra.naPotezi()).ime());
-				
 
 				if (Vodja.vrstaIgralca.get(Igralec.Rdec) == VrstaIgralca.Clovek && 
 						Vodja.vrstaIgralca.get(Igralec.Moder) == VrstaIgralca.Clovek) {
-					menjaj.setVisible(false);
 					razveljavi.setVisible(true);
+					
 					if (Vodja.igra.modre.isEmpty() && !Vodja.igra.rdece.isEmpty()) {
 						menjaj.setVisible(true);
 					}
-					if (Vodja.igra.zadnja == null) razveljavi.setVisible(false);
+					if (Vodja.igra.zadnja == null ||
+							(!Vodja.igra.modre.isEmpty() && Vodja.igra.rdece.isEmpty())) 
+						razveljavi.setVisible(false);
 
 				}
 				break;
 			case ZMAGA_RDEC: 
 				status.setText("Zmagal je RDEC - " + 
 						Vodja.kdoIgra.get(Vodja.igra.naPotezi().nasprotnik()).ime());
-				razveljavi.setVisible(false);
 				break;
 			case ZMAGA_MODER: 
 				status.setText("Zmagal je MODER - " + 
 						Vodja.kdoIgra.get(Vodja.igra.naPotezi().nasprotnik()).ime());
-				razveljavi.setVisible(false);
 				break;
 			}
 		}

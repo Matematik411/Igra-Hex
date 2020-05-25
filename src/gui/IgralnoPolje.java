@@ -11,11 +11,10 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
-import vodja.Vodja; //ce ne importamo vedno rabimo vodja.Vodja, zdaj le Vodja...
+import vodja.Vodja; 
 
 import logika.Igra;
 import logika.Igralec;
-//import logika.Polje;
 import logika.Tocka;
 import splosno.Koordinati;
 

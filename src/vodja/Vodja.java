@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
 
 import gui.GlavnoOkno;
-import inteligenca.BfsIskanje;
 import inteligenca.Inteligenca;
 
 import java.util.Map;
