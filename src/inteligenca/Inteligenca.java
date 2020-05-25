@@ -23,7 +23,7 @@ public class Inteligenca extends KdoIgra {
 	public static boolean nacinGlobalno;
 	
 	public Inteligenca() {
-		super("Rehoboam");
+		super("ZajcMaier");
 		this.glob = 7;
 		this.ai = 2;
 		this.nacinGlobalno = true;
@@ -195,13 +195,6 @@ public class Inteligenca extends KdoIgra {
 		if (ocena == ZMAGA) {
 			for (int g = 1; g < globina; g++) {
 				OcenjenaPoteza boljsa = alphaBetaMinimax(igra, g, ZGUBA, ZMAGA, jaz);
-				if (boljsa.ocena == ZMAGA) return boljsa;
-			}
-		} else if (ocena == ZGUBA) {
-			Igra kopijaIgre = new Igra(igra);
-			kopijaIgre.odigraj(najboljsaPoteza);
-			for (int g = 1; g < globina; g++) {
-				OcenjenaPoteza boljsa = alphaBetaMinimax(igra, g, ZGUBA, ZMAGA, jaz.nasprotnik());
 				if (boljsa.ocena == ZMAGA) return boljsa;
 			}
 		}

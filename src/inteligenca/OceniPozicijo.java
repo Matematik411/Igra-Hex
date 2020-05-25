@@ -49,10 +49,22 @@ public class OceniPozicijo {
 					else levo_levo_zg = Integer.MAX_VALUE;
 				} catch (ArrayIndexOutOfBoundsException e) { levo_levo_zg = Integer.MAX_VALUE; }
 				
-				try { levo_zg = tabela_dolzin_rdeci[i - 1][j].vrednost; } 
-				catch (ArrayIndexOutOfBoundsException e) { levo_zg = Integer.MAX_VALUE; }
-				try { desno_zg = tabela_dolzin_rdeci[i - 1][j + 1].vrednost; } 
-				catch (ArrayIndexOutOfBoundsException e) { desno_zg = Integer.MAX_VALUE; }
+				try { 
+					try {
+						if (plosca[i - 1][j - 1].polje == Polje.Moder && plosca[i - 2][j + 1].polje == Polje.Moder) {
+							levo_zg = Integer.MAX_VALUE;
+						}
+						else {levo_zg = tabela_dolzin_rdeci[i - 1][j].vrednost;}
+					} catch (ArrayIndexOutOfBoundsException e) {levo_zg = tabela_dolzin_rdeci[i - 1][j].vrednost; }	
+				} catch (ArrayIndexOutOfBoundsException e) { levo_zg = Integer.MAX_VALUE; }
+				try { 
+					try {
+						if (plosca[i - 1][j + 2].polje == Polje.Moder && plosca[i - 2][j + 1].polje == Polje.Moder) {
+							desno_zg = Integer.MAX_VALUE;
+						}
+						else {desno_zg = tabela_dolzin_rdeci[i - 1][j + 1].vrednost;}
+					} catch (ArrayIndexOutOfBoundsException e) {desno_zg = tabela_dolzin_rdeci[i - 1][j + 1].vrednost; }	 
+				} catch (ArrayIndexOutOfBoundsException e) { desno_zg = Integer.MAX_VALUE; }
 				try {
 					if (plosca[i][j + 1].polje == Polje.PRAZNO && plosca[i - 1][j + 1].polje == Polje.PRAZNO) {
 						desno_desno_zg = tabela_dolzin_rdeci[i - 1][j + 2].vrednost;
@@ -187,9 +199,23 @@ public class OceniPozicijo {
 					else gor_gor_lev = Integer.MAX_VALUE;
 				} catch (ArrayIndexOutOfBoundsException e) { gor_gor_lev = Integer.MAX_VALUE; }
 				
-				try { gor_lev = tabela_dolzin_modri[i][j - 1].vrednost; } 
+				try { 
+					try {
+						if (plosca[i - 1][j - 1].polje == Polje.Rdec && plosca[i + 1][j - 2].polje == Polje.Rdec) {
+							gor_lev = Integer.MAX_VALUE;
+						}
+						else gor_lev = tabela_dolzin_modri[i][j - 1].vrednost;
+					} catch (ArrayIndexOutOfBoundsException e) { gor_lev = tabela_dolzin_modri[i][j - 1].vrednost;  }
+					} 
 				catch (ArrayIndexOutOfBoundsException e) { gor_lev = Integer.MAX_VALUE; }
-				try { dol_lev = tabela_dolzin_modri[i + 1][j - 1].vrednost; } 
+				try { 
+					try {
+						if (plosca[i + 2][j - 1].polje == Polje.Rdec && plosca[i + 1][j - 2].polje == Polje.Rdec) {
+							dol_lev = Integer.MAX_VALUE;
+						}
+						else dol_lev = tabela_dolzin_modri[i + 1][j - 1].vrednost; 
+					} catch (ArrayIndexOutOfBoundsException e) { dol_lev = tabela_dolzin_modri[i + 1][j - 1].vrednost;   }
+					} 
 				catch (ArrayIndexOutOfBoundsException e) { dol_lev = Integer.MAX_VALUE; }
 				try {
 					if (plosca[i + 1][j - 1].polje == Polje.PRAZNO && plosca[i + 1][j].polje == Polje.PRAZNO) {
