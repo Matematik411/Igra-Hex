@@ -126,7 +126,7 @@ public class Inteligenca extends KdoIgra {
 			if (globina > 3) globina = 3;
 		}
 		
-		if (!nacinLokalno) System.out.println("DA");
+		//if (!nacinLokalno) System.out.println("DA");
 		
 		//List<Koordinati> najbolsePoteze = new LinkedList<Koordinati>();
 		Koordinati najboljsaPoteza = moznePoteze.get(0); 
@@ -141,13 +141,13 @@ public class Inteligenca extends KdoIgra {
 			switch (kopijaIgre.stanje()) {
 			
 			case ZMAGA_RDEC: {
-				System.out.println("Rdeci-zmaga");
+				//System.out.println("Rdeci-zmaga");
 				ocenaPoteze = (jaz == Igralec.Rdec ? ZMAGA : ZGUBA);
 				break;
 			}
 			
 			case ZMAGA_MODER: {
-				System.out.println("Modri-zmaga");
+				//System.out.println("Modri-zmaga");
 				ocenaPoteze = (jaz == Igralec.Moder ? ZMAGA : ZGUBA); 				
 				break;
 			}
@@ -158,6 +158,8 @@ public class Inteligenca extends KdoIgra {
 				// globina > 1
 				else ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
 			}
+			
+			
 			
 		
 			if (igra.naPotezi() == jaz) {
@@ -189,6 +191,20 @@ public class Inteligenca extends KdoIgra {
 		//Random RANDOM = new Random();
 		//int i = RANDOM.nextInt(najbolsePoteze.size());
 		//najboljsaPoteza = najbolsePoteze.get(i);
+		
+		if (ocena == ZMAGA) {
+			for (int g = 1; g < globina; g++) {
+				OcenjenaPoteza boljsa = alphaBetaMinimax(igra, g, ZGUBA, ZMAGA, jaz);
+				if (boljsa.ocena == ZMAGA) return boljsa;
+			}
+		} else if (ocena == ZGUBA) {
+			Igra kopijaIgre = new Igra(igra);
+			kopijaIgre.odigraj(najboljsaPoteza);
+			for (int g = 1; g < globina; g++) {
+				OcenjenaPoteza boljsa = alphaBetaMinimax(igra, g, ZGUBA, ZMAGA, jaz.nasprotnik());
+				if (boljsa.ocena == ZMAGA) return boljsa;
+			}
+		}
 		
 		return new OcenjenaPoteza(najboljsaPoteza, ocena);
 	}
