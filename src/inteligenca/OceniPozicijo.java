@@ -160,6 +160,7 @@ public class OceniPozicijo {
 			spremenljivka = spremenljivka.pointer;
 		}
 		
+		
 		return new Pot(najmanjsa_rdeca, rdeca_pot);
 	}
 	
@@ -335,8 +336,8 @@ public class OceniPozicijo {
 		int b = -a;
 	
 		if (jaz == Igralec.Rdec) {
-			if (vrednost_modri == Integer.MAX_VALUE) return Integer.MAX_VALUE;
-			if (vrednost_rdeci == Integer.MAX_VALUE) return Integer.MIN_VALUE;
+			if (vrednost_modri == Integer.MAX_VALUE || vrednost_rdeci == 0) return Integer.MAX_VALUE;
+			if (vrednost_rdeci == Integer.MAX_VALUE || vrednost_modri == 0) return Integer.MIN_VALUE;
 			return -(a * vrednost_rdeci + b * vrednost_modri );
 		}
 		else {
