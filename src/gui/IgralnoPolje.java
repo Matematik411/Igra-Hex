@@ -1,5 +1,12 @@
 package gui;
-
+/*
+ * Tu se nahaja opis igralnega polja, po katerem se igra.
+ * 
+ * Glavni del polja je mreza iz sestkotnikov, ki je obrobljena z barvama igralcev,
+ * na koncih, ki jih zelita povezati s potjo.
+ * 
+ * Osvetljena je zadnji postavljeni zeton, v trenutku zmage, pa se zmagovalna pot pobarva.
+ */
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,64 +25,72 @@ import logika.Igralec;
 import logika.Tocka;
 import splosno.Koordinati;
 
-// Polje, na katerem je narisana mreza, po kateri igramo.
 @SuppressWarnings("serial")
 public class IgralnoPolje extends JPanel implements MouseListener {
 	
+	// Napovedane kolicine s katerimi tekom datoteke racunam.
+	// a = stranica sestkotnika mreze
 	private double a;
+	// k = polovica sirine sestkotnika v navpicnem polozaju
 	private double k;
+	// Beli prostor (ws) je prostor okoli narisane figure, da le ta ni cisto ob robu.
 	private double ws;
 	
-	// Relativna sirina crte
+	// Relativna sirina crte glede na a.
 	private final static double LINE_WIDTH = 0.10;
-	// Relativni prostor okoli zetonov
+	// Relativni prostor okoli zetonov glede na a.
 	private final static double PADDING = 0.10;
 
-	
+	// Konstruktor, ki zgradi igralno polje velikosti getPreferredSize().
 	public IgralnoPolje() {
 		setBackground(Color.WHITE);
-		this.addMouseListener(this);
-		
+		this.addMouseListener(this);	
 	}
-
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(850, 500);
 	}
 
 	
-	// sirina enega kvadratka
+	// Stranico izracunamo glede na velikost odprtega okna.
 	private void stranica() {
-		//return Math.min(getWidth(), getHeight()) / Igra.N;
+		// Poracunamo kaksna je lahko stranica, da bo na polju vse potrebno.
 		double sirina = (2 * getWidth()) / (Math.sqrt(3.0) * (3 * (Igra.N+2) - 2));
 		double visina = (2 * getHeight()) / (3 * (Igra.N+2) - 2);
+		
+		// Izberemo manjso od izracunanih vrednosti in poracunamo spremenljivke.
 		a =  Math.min(sirina, visina);
 		k = Math.sqrt(3) * a * 0.5;
 		ws = 2 * a;
 	}
 	
+	// Metoda, ki narise zeton v i-ti stolpec in j-to vrstico mreze.
 	private void narisiZeton(Graphics2D g2, int i, int j, Igralec p) {
-		// premer zetona
+		// Izracunam premer zetona.
 		double d = 2 * a * (1.0 - LINE_WIDTH - 2.0 * PADDING);
 		
-		// sredisce
+		// Nato se sredisce.
 		int xSred = (int) (ws + (2 * i + j + 1) * k);
 		int ySred = (int) (ws*0.5 + (1.5 * j + 1) * a);
 		double x = xSred - d * 0.5;
 		double y = ySred - d * 0.5;
 		
+		// Izberem usrezno barvo in narisem zeton.
 		if (p == Igralec.Rdec) g2.setColor(Color.RED);
 		else g2.setColor(Color.BLUE);
 		g2.fillOval((int)x, (int)y, (int)d , (int)d);
 		
-		// zadnjega poudari
-		if (Vodja.igra.zadnja != null && Vodja.igra.zadnja.koordinati.getX() == i && Vodja.igra.zadnja.koordinati.getY() == j) {
+		// Zadnji postavljeni zeton osvetlim.
+		if (Vodja.igra.zadnja != null && 
+				Vodja.igra.zadnja.koordinati.getX() == i && 
+				Vodja.igra.zadnja.koordinati.getY() == j) {
 			g2.setStroke(new BasicStroke((float) (1.5 * a * LINE_WIDTH)));
 			g2.setColor(Color.ORANGE);
 			g2.drawOval((int)x, (int)y, (int)d, (int)d);
 		}
 	}
 	
+	// Sledi 6 metod, ki narisejo mrezo in obarvana ombocja ob robih.
 	private int[][] navpicnaCrta(int i, int n) {
 		int d = 2 * n;
 		
@@ -220,6 +235,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return crta;
 	}
 	
+	// To pa je metoda, ki vrne sestkotnik v mrezi, za namene barvanja zmagovalne poti.
 	private int[][] sestkotnik(int i, int j) {
 		int[][] sestkotnik = new int[2][6];
 		
@@ -247,14 +263,17 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return sestkotnik;
 	}
 	
-	
+	// Sledi glavna metoda razreda, ki se klice ob vsakem osvezevanju in na pravilen
+	// nacin klice vse prejsnje, iz njih dobi elemente, te pa nato narise na polje.
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		
+		// Na zacetku izracunamo stranico.
 		stranica();
 
-		// ce imamo zmagovalno crto, njeno ozadje pobarvamo
+		// V primeru, da imamo zmagovalno crto, njeno ozadje pobarvamo.
 		Set<Tocka> t = null;
 		if (Vodja.igra != null) {t = Vodja.igra.konec;}
 		if (t != null) {
@@ -267,23 +286,23 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 			}
 		}
 		
-		// crte
-		// najprej robne, ki so posebnih barv in krepke
-		// modre
+		// Zdaj s pravilnimi argumenti klicemo metode, ki vracajo dele mreze.
+
+		// Najprej modri robni obmocji.
 		g2.setColor(Color.BLUE);
 		int[][] crta = leviModri(Igra.N);
 		g2.fillPolygon(crta[0], crta[1], 2 * Igra.N + 3);
 		crta = desniModri(Igra.N);
 		g2.fillPolygon(crta[0], crta[1], 2 * Igra.N + 3);
 
-		// rdece
+		// Nato rdeci robni obmocji.
 		g2.setColor(Color.RED);
 		crta = zgorajRdeci(Igra.N);
 		g2.fillPolygon(crta[0], crta[1], 2 * Igra.N + 3);
 		crta = spodajRdeci(Igra.N);
 		g2.fillPolygon(crta[0], crta[1], 2 * Igra.N + 3);
 
-		// vmesne crte - crne
+		// In se crte mreze.
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke((float) (a * LINE_WIDTH)));
 		for (int i = 0; i <= Igra.N; i++) {
@@ -293,13 +312,13 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 			crta = vodoravnaCrta(i, Igra.N);
 			g2.drawPolyline(crta[0], crta[1], 2 * Igra.N);	 
 		}
-		// dodatno moram narisati crti levo-spodaj in desno-zgoraj (zanka ju ne zajame, saj sta posebni)
+		// Ostaneta se dve robni crti, ki nista zajeti v zankah.
 		g2.drawLine((int) (k * (Igra.N - 1) + ws), (int) (Igra.N * 1.5 * a + ws*0.5),
 			(int) (k * Igra.N + ws), (int) (a * (1.5 * Igra.N + 0.5) + ws*0.5));
 		g2.drawLine((int) ((2 * Igra.N - 1) * k + ws), (int) (ws*0.5), 
 				(int) (2 * Igra.N * k + ws), (int) (a * 0.5 + ws*0.5));
 		
-		// krizci in krozci
+		// Na polje moramo dodati se zetone.
 		Tocka[][] plosca;;
 		if (Vodja.igra != null) {
 			plosca = Vodja.igra.getPlosca();
@@ -316,17 +335,20 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		
 	}
 	
+	// Naslednja metoda zazna, v katero polje mreze je kliknil clovek za svojo potezo.
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// Mreza je aktivna le v primeru, ko je na potezi clovek.
 		if (Vodja.clovekNaVrsti) {
+			// Preberemo x, y koordinati klika, ki se nato pretvorita v i, j koordinati
+			// mreze. Pri tem je potrebno obravnavati vec moznosti.
 			int x = (int) (e.getX() - ws);
 			int y = (int) (e.getY() - ws*0.5);
 
-			
 			int navpicno = (int) ( y / (0.5 * a));
 			int vodoravno = (int) (x / k);
 
-			// ce smo v srednjem delu sestkotnika po visini
+			// 1. moznosti - smo v srednjem delu sestkotnika po visini.
 			if (navpicno % 3 > 0) {
 				int j = navpicno / 3;
 				vodoravno -= j;
@@ -338,13 +360,13 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 				}
 			}
 			
-			// sicer smo v cik-cak pasu
-			// ce se navpicno in vodoravno sesteje v sodo imamo primer /
+			// Sicer smo v pasu kjer crte tvorijo lomljenko.
+			// 2. - ce se navpicno in vodoravno sesteje v sodo stevilo, imamo primer /.
 			else if ((navpicno + vodoravno) % 2 == 0) {
 				int relX = (int) (x % k);
 				int relY = (int) (y % (0.5 * a));
 
-				// smo nad crto
+				// Lahko se nahajamo nad crto.
 				if (relY < ((-0.5 * a) / k) * relX + (0.5 - LINE_WIDTH * 0.5) * a) {
 					int j = (navpicno / 3) - 1;
 					int i = (vodoravno - j) / 2;
@@ -353,7 +375,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					}
 					
 				}
-				// smo pod crto
+				// Ali pod njo.
 				else if (relY > ((-0.5 * a) / k) * relX + (0.5 + LINE_WIDTH * 0.5) * a) {
 					int j = navpicno / 3;
 					int i = ((vodoravno - j) / 2) ;
@@ -364,12 +386,12 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 				}
 			}
 			
-			// sicer smo v primeru \
+			// 3. - ostal je primer \.
 			else {
 				int relX = (int) (x % k);
 				int relY = (int) (y % (0.5 * a));			
 				
-				// smo nad crto
+				// Lahko smo nad crto.
 				if (relY < ((0.5 * a) / k) * relX - a * LINE_WIDTH * 0.5) {
 					int j = (navpicno / 3) - 1;
 					int i = (vodoravno - j) / 2;
@@ -378,7 +400,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 					}
 					
 				}
-				// smo pod crto
+				// Ali pod njo.
 				else if (relY > ((0.5 * a) / k) * relX + a * LINE_WIDTH * 0.5) {
 					int j = navpicno / 3;
 					int i = ((vodoravno - j) / 2) ;
@@ -392,6 +414,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		}
 	}
 
+	// Preostalih metod ne uporabljamo.
 	@Override
 	public void mousePressed(MouseEvent e) {		
 	}

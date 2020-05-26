@@ -1,5 +1,10 @@
 package logika;
-
+/*
+ * Enum tip, ki vsebuje mozna igralca igre.
+ * 
+ * Pravtako vsebuje preprosti metodi, ki vrneta trenutnega nasprotnika v igri
+ * in barvo igralca, ki je na potezi.
+ */
 public enum Igralec {
 	Rdec, Moder;
 	
