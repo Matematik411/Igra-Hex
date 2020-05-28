@@ -130,7 +130,7 @@ public class BfsIskanje {
 	// Metoda, ki seizpolne slovarja glede na trenutno stanje ne mrezi.
 	private static void BFSGlobine(Tocka zacetek, Tocka[][] plosca) {
 		// Definiramo si nova slovarja.
-		globine = new HashMap<Koordinati, Integer>();  
+		globine = new HashMap<Koordinati, Integer>();
 		predhodnji = new HashMap<Koordinati, Koordinati>();
 		
 		// Napovemo stevilo, s katerim bomo racunali globino do izbrane tocke.
