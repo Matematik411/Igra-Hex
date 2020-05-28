@@ -193,7 +193,6 @@ public class BfsIskanje {
 			}
 		}
 
-
 	}
 	
 	// Metoda, ki danim koordinatam priredi mnozico okoliskih tock, ki v mrezi obstajajo.

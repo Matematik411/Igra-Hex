@@ -31,7 +31,7 @@ public class IzbiraPotez {
 				 if (plosca[i][j].polje == Polje.PRAZNO) prazne.add(koordinate);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 		}
-		
+
 		return prazne;
 	}
 	
@@ -55,7 +55,10 @@ public class IzbiraPotez {
 			if (pot.size() == 0) {
 				potOcena.vrednost = 1;
 				Inteligenca.nacinLokalno = false;
+				System.out.println("MODRI");
 				List<Koordinati> modra_pot = BfsIskanje.BfsIskanjePotiModer(igra);
+				System.out.println(modra_pot);
+				System.out.println(modra_pot.size());
 				for (Koordinati koordinata : modra_pot) {
 					pot.add(new Vrednost(koordinata));
 				}
@@ -91,6 +94,10 @@ public class IzbiraPotez {
 							seznam.add(Tocka2.koordinati);
 						}
 					}
+				}
+				if (globina == 5) 	{
+					System.out.println("preveri_prazno");
+					System.out.println(preveriPrazno(igra, seznam));
 				}
 				return preveriPrazno(igra, seznam);
 			}
@@ -131,7 +138,13 @@ public class IzbiraPotez {
 				} catch (ArrayIndexOutOfBoundsException e) {}
 				
 				List<Koordinati> prazno = preveriPrazno(igra, seznam);
-				if (prazno.size() > 0) return prazno;
+				if (prazno.size() > 0) {
+					if (globina == 5) 	{
+						System.out.println("sosedi");
+						System.out.println(preveriPrazno(igra, seznam));
+					}
+					return prazno;
+				}
 				
 				
 				seznam.add(new Koordinati(j, i - 1));
@@ -152,6 +165,8 @@ public class IzbiraPotez {
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);
 				}
+				if (globina == 5) 	System.out.println(preveriPrazno(igra, seznam));
+
 				return preveriPrazno(igra, seznam);
 			}
 			
@@ -170,7 +185,10 @@ public class IzbiraPotez {
 			if (pot.size() == 0) {
 				potOcena.vrednost = 1;
 				Inteligenca.nacinLokalno = false;
+				System.out.println("RDECIIII");
 				List<Koordinati> modra_pot = BfsIskanje.BfsIskanjePotiRdec(igra);
+				System.out.println(modra_pot);
+				System.out.println(modra_pot.size());
 				for (Koordinati koordinata : modra_pot) {
 					pot.add(new Vrednost(koordinata));
 				}

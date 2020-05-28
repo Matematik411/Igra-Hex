@@ -14,11 +14,11 @@ public class Inteligenca extends KdoIgra {
 	private static final int PORAZ = -ZMAGA;
 	private static int glob;
 	public static boolean nacinLokalno = true;
-	public static boolean nacinGlobalno;
+	public static boolean nacinGlobalno ;
 	
 	public Inteligenca() {
 		super("ZajcMaier");
-		this.glob = 7;
+		this.glob = 3;
 		this.nacinGlobalno = true;
 	}
 	
@@ -45,6 +45,7 @@ public class Inteligenca extends KdoIgra {
 		
 		if (moznePoteze.size() == 0) {
 			moznePoteze = igra.poteze();
+			System.out.println("alfabeta");
 			if (globina > 3) globina = 3;
 		}
 		
@@ -74,17 +75,29 @@ public class Inteligenca extends KdoIgra {
 			
 			default:
 				// nekdo je na potezi
-				if (globina == 1) ocenaPoteze = OceniPozicijo.oceniPozicijo(kopijaIgre, jaz);
+				if (globina == 1) {
+					System.out.println(p);
+					ocenaPoteze = OceniPozicijo.oceniPozicijo(kopijaIgre, jaz);
+					System.out.println(ocenaPoteze);
+
+				}
 				// globina > 1
-				else ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
+				else {
+					ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
+					if (globina == 3) {
+						System.out.println(p);
+						
+						System.out.println(ocenaPoteze);
+					}
+
+				}
 			}
 			
 			
 			
 		
 			if (igra.naPotezi() == jaz) {
-				if (ocenaPoteze == ocena) {}//najbolsePoteze.add(p);
-				else if (ocenaPoteze > ocena) {
+				if (ocenaPoteze >= ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
 					//najbolsePoteze.clear();
@@ -94,8 +107,8 @@ public class Inteligenca extends KdoIgra {
 			}
 			
 			else {
-				if (ocenaPoteze == ocena) {}//najbolsePoteze.add(p);
-				else if (ocenaPoteze < ocena) {
+
+				if (ocenaPoteze <= ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
 					//najbolsePoteze.clear();
@@ -109,12 +122,12 @@ public class Inteligenca extends KdoIgra {
 		}
 		
 		
-		if (ocena == ZMAGA) {
-			for (int g = 1; g < globina; g++) {
-				OcenjenaPoteza boljsa = alphaBetaMinimax(igra, g, PORAZ, ZMAGA, jaz);
-				if (boljsa.ocena == ZMAGA) return boljsa;
-			}
-		}
+//		if (ocena == ZMAGA) {
+//			for (int g = 1; g < globina; g++) {
+//				OcenjenaPoteza boljsa = alphaBetaMinimax(igra, g, PORAZ, ZMAGA, jaz);
+//				if (boljsa.ocena == ZMAGA) return boljsa;
+//			}
+//		}
 		
 		return new OcenjenaPoteza(najboljsaPoteza, ocena);
 	}
