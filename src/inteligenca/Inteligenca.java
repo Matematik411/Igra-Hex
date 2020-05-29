@@ -77,14 +77,14 @@ public class Inteligenca extends KdoIgra {
 				// nekdo je na potezi
 				if (globina == 1) {
 					System.out.println(p);
-					ocenaPoteze = OceniPozicijo.oceniPozicijo(kopijaIgre, jaz);
+					ocenaPoteze = OceniPozicijo.oceniPozicijo(kopijaIgre, jaz, globina);
 					System.out.println(ocenaPoteze);
 
 				}
 				// globina > 1
 				else {
 					ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
-					if (globina == 3) {
+					if (globina == 4) {
 						System.out.println(p);
 						
 						System.out.println(ocenaPoteze);
