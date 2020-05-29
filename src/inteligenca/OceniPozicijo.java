@@ -298,12 +298,12 @@ public class OceniPozicijo {
 		int vrednost_modri;
 
 		if (Inteligenca.nacinLokalno == true) {
-			vrednost_rdeci = oceni_rdec(igra).vrednost;
-			vrednost_modri = oceni_moder(igra).vrednost;	
+			vrednost_rdeci = oceni_rdec(igra).vrednost - 1;
+			vrednost_modri = oceni_moder(igra).vrednost - 1;	
 		}
 		else {
-			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
-			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
+			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size() - 1;
+			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size() - 1;
 		}
 //		vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
 //		vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
@@ -314,10 +314,6 @@ public class OceniPozicijo {
 		double alpha = (double) a;
 		double n = (double) N;
 		
-		if (globina == 1) {
-			System.out.println(vrednost_rdeci);
-			System.out.println(vrednost_modri);
-		}
 	
 		if (jaz == Igralec.Rdec) {
 			if (vrednost_modri == Integer.MAX_VALUE || vrednost_rdeci == 0) return Integer.MAX_VALUE;

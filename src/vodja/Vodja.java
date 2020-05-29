@@ -32,21 +32,11 @@ public class Vodja {
 	// Metodi, ki zazeneta novo igro.
 	public static void igramoNovoIgro () {
 		igra = new Igra(Igra.N);
-		System.out.println(Inteligenca.nacinGlobalno);
-		System.out.println(Inteligenca.nacinLokalno);
-
-		//Inteligenca.nacinGlobalno = true;
-		//Inteligenca.nacinLokalno = true;
 		igramo();
 	}
 	
 	public static void igramoNovoIgro(int n) {
-		
 		igra = new Igra(n);
-		//System.out.println(Inteligenca.nacinGlobalno);
-		//System.out.println(Inteligenca.nacinLokalno);
-		//Inteligenca.nacinGlobalno = true;
-		//Inteligenca.nacinLokalno = true;
 		igramo();
 	}
 	

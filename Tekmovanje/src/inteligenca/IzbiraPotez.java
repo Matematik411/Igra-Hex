@@ -31,7 +31,7 @@ public class IzbiraPotez {
 				 if (plosca[i][j].polje == Polje.PRAZNO) prazne.add(koordinate);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 		}
-		
+
 		return prazne;
 	}
 	
@@ -131,27 +131,32 @@ public class IzbiraPotez {
 				} catch (ArrayIndexOutOfBoundsException e) {}
 				
 				List<Koordinati> prazno = preveriPrazno(igra, seznam);
-				if (prazno.size() > 0) return prazno;
-				
-				
-				seznam.add(new Koordinati(j, i - 1));
-				seznam.add(new Koordinati(j - 1, i + 1));
-				seznam.add(new Koordinati(j + 1, i - 1));
-				seznam.add(new Koordinati(j, i + 1));
-				
-				if (globina > 0) {
-					seznam.add(new Koordinati(j + 1, i));
-					seznam.add(new Koordinati(j - 1, i));
+				if (prazno.size() > 0) {
+					return prazno;
 				}
-				if (globina > 0) {
-					seznam.add(new Koordinati(j + 1, i - 2));
-					seznam.add(new Koordinati(j - 1, i + 2));
-					seznam.add(new Koordinati(j + 1, i + 1));
-					seznam.add(new Koordinati(j - 1, i - 1));
+				
+				if (pot.size() > 2) {	
+					seznam.add(new Koordinati(j, i - 1));
+					seznam.add(new Koordinati(j - 1, i + 1));
+					seznam.add(new Koordinati(j + 1, i - 1));
+					seznam.add(new Koordinati(j, i + 1));
+					
+					if (globina > 0) {
+						seznam.add(new Koordinati(j + 1, i));
+						seznam.add(new Koordinati(j - 1, i));
+					}
+					if (globina > 0) {
+						seznam.add(new Koordinati(j + 1, i - 2));
+						seznam.add(new Koordinati(j - 1, i + 2));
+						seznam.add(new Koordinati(j + 1, i + 1));
+						seznam.add(new Koordinati(j - 1, i - 1));
+					}
 				}
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);
 				}
+
+
 				return preveriPrazno(igra, seznam);
 			}
 			
@@ -170,8 +175,8 @@ public class IzbiraPotez {
 			if (pot.size() == 0) {
 				potOcena.vrednost = 1;
 				Inteligenca.nacinLokalno = false;
-				List<Koordinati> modra_pot = BfsIskanje.BfsIskanjePotiRdec(igra);
-				for (Koordinati koordinata : modra_pot) {
+				List<Koordinati> rdeca_pot = BfsIskanje.BfsIskanjePotiRdec(igra);
+				for (Koordinati koordinata : rdeca_pot) {
 					pot.add(new Vrednost(koordinata));
 				}
 			}
@@ -249,21 +254,22 @@ public class IzbiraPotez {
 				if (prazno.size() > 0) return prazno;
 				
 				
-				
-				seznam.add(new Koordinati(j + 1, i));
-				seznam.add(new Koordinati(j - 1, i + 1));
-				seznam.add(new Koordinati(j - 1, i));
-				seznam.add(new Koordinati(j + 1, i - 1));
-				
-				if (globina > 0) {
-				seznam.add(new Koordinati(j, i + 1));
-				seznam.add(new Koordinati(j, i - 1));
-				}
-				if (globina > 0) {
-					seznam.add(new Koordinati(j - 2, i + 1));
-					seznam.add(new Koordinati(j - 1, i - 1));
-					seznam.add(new Koordinati(j + 1, i + 1));
-					seznam.add(new Koordinati(j + 2, i - 1));
+				if (pot.size() > 2) {
+					seznam.add(new Koordinati(j + 1, i));
+					seznam.add(new Koordinati(j - 1, i + 1));
+					seznam.add(new Koordinati(j - 1, i));
+					seznam.add(new Koordinati(j + 1, i - 1));
+					
+					if (globina > 0) {
+					seznam.add(new Koordinati(j, i + 1));
+					seznam.add(new Koordinati(j, i - 1));
+					}
+					if (globina > 0) {
+						seznam.add(new Koordinati(j - 2, i + 1));
+						seznam.add(new Koordinati(j - 1, i - 1));
+						seznam.add(new Koordinati(j + 1, i + 1));
+						seznam.add(new Koordinati(j + 2, i - 1));
+					}	
 				}
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);

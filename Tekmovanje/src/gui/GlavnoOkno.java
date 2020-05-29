@@ -158,9 +158,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	}
 	
 	// V tem nizu je zapisan izpis, ki ga uporabnik vidi, ce zeli prebrati vec o igri.
-	String opisIgre = "Igra Hex je zelo zanimiva in pouèna igra, ki nauèi igralca "
-			+ "veliko o življenju.\n"
-			+ "Lahko dodaš kar želiš.";
+	String opisIgre = "Igra Hex je zelo zanimiva in pouèna igra, ki veliko nauèi igralca!";
 	
 	
 	// Zdaj je definiran osnovni izgled okna. 

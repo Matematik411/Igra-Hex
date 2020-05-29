@@ -292,35 +292,71 @@ public class OceniPozicijo {
 	
 	
 	
-	public static int oceniPozicijo(Igra igra, Igralec jaz) {
+	public static int oceniPozicijo(Igra igra, Igralec jaz, int globina) {
 		int N = igra.velikost;
 		int vrednost_rdeci;
 		int vrednost_modri;
 
 		if (Inteligenca.nacinLokalno == true) {
-			vrednost_rdeci = oceni_rdec(igra).vrednost;
-			vrednost_modri = oceni_moder(igra).vrednost;	
+			vrednost_rdeci = oceni_rdec(igra).vrednost - 1;
+			vrednost_modri = oceni_moder(igra).vrednost - 1;	
 		}
 		else {
-			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
-			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
+			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size() - 1;
+			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size() - 1;
 		}
+//		vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
+//		vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
 
 		int a = Integer.MAX_VALUE / (N * N);
 		int b = -a;
+		
+		double alpha = (double) a;
+		double n = (double) N;
+		
 	
 		if (jaz == Igralec.Rdec) {
-			if (vrednost_modri == Integer.MAX_VALUE) return Integer.MAX_VALUE;
-			if (vrednost_rdeci == Integer.MAX_VALUE) return Integer.MIN_VALUE;
-			return -(a * vrednost_rdeci + b * vrednost_modri );
+			if (vrednost_modri == Integer.MAX_VALUE || vrednost_rdeci == 0) return Integer.MAX_VALUE;
+			if (vrednost_rdeci == Integer.MAX_VALUE || vrednost_modri == 0) return Integer.MIN_VALUE;
+			
+//			if (vrednost_modri > vrednost_rdeci) {
+//				double z = (2/(n * n - 2) * 1 - 1 / (n * n - 2) * 2 + 1 - 2/(n * n - 2) * vrednost_rdeci + 1 / (n * n - 2) * vrednost_modri) / (2 / (n * n * alpha));
+//			
+//				return (int) z;
+//			} else if (vrednost_modri < vrednost_rdeci) {
+//				double z = ((2/3) * 2 - (1/3) * 1 - (2/3) * vrednost_rdeci + (1/3) * vrednost_modri ) / 
+//						(2 * (n * n - 2)/(3 * n * n * alpha));
+//						
+//				return (int) z;
+//			} else return 0;
+			return -(a * vrednost_rdeci + b * vrednost_modri ) + 10 * vrednost_rdeci;
+			
 		}
 		else {
-			if (vrednost_modri == Integer.MAX_VALUE) return Integer.MIN_VALUE;
-			if (vrednost_rdeci == Integer.MAX_VALUE) return Integer.MAX_VALUE;
-			return (a * vrednost_rdeci + b * vrednost_modri );
+			if (vrednost_modri == Integer.MAX_VALUE || vrednost_rdeci == 0) return Integer.MIN_VALUE;
+			if (vrednost_rdeci == Integer.MAX_VALUE || vrednost_modri == 0) return Integer.MAX_VALUE;
+			
+//			if (vrednost_modri > vrednost_rdeci) {
+//				double z = -(2/(n * n - 2) * 1 - 1 / (n * n - 2) * 2 + 1 - 2/(n * n - 2) * vrednost_rdeci + 1 / (n * n - 2) * vrednost_modri) / (2 / (n * n * alpha));
+//			
+//				return (int) z;
+//			} else if (vrednost_modri < vrednost_rdeci) {
+//				double z = -((2/3) * 2 - (1/3) * 1 - (2/3) * vrednost_rdeci + (1/3) * vrednost_modri ) / 
+//						(2 * (n * n - 2)/(3 * n * n * alpha));
+//						
+//				return (int) z;
+//			} else return 0;
+			return (a * vrednost_rdeci + b * vrednost_modri ) + 10 * vrednost_modri;
 		}
 	}
 }
+
+
+
+
+
+
+
 
 
 

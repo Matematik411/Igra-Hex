@@ -31,7 +31,7 @@ public class Vodja {
 	
 	// Metodi, ki zazeneta novo igro.
 	public static void igramoNovoIgro () {
-		igra = new Igra();
+		igra = new Igra(Igra.N);
 		igramo();
 	}
 	

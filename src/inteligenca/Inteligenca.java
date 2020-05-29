@@ -18,7 +18,7 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("ZajcMaier");
-		this.glob = 4;
+		this.glob = 6;
 		this.nacinGlobalno = true;
 	}
 	
@@ -45,7 +45,6 @@ public class Inteligenca extends KdoIgra {
 		
 		if (moznePoteze.size() == 0) {
 			moznePoteze = igra.poteze();
-			System.out.println("alfabeta");
 			if (globina > 3) globina = 3;
 		}
 		
@@ -76,20 +75,11 @@ public class Inteligenca extends KdoIgra {
 			default:
 				// nekdo je na potezi
 				if (globina == 1) {
-					System.out.println(p);
 					ocenaPoteze = OceniPozicijo.oceniPozicijo(kopijaIgre, jaz, globina);
-					System.out.println(ocenaPoteze);
-
 				}
 				// globina > 1
 				else {
 					ocenaPoteze = alphaBetaMinimax(kopijaIgre, globina-1, alpha, beta, jaz).ocena;
-					if (globina == 4) {
-						System.out.println(p);
-						
-						System.out.println(ocenaPoteze);
-					}
-
 				}
 			}
 			
