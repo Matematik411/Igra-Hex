@@ -298,12 +298,12 @@ public class OceniPozicijo {
 		int vrednost_modri;
 
 		if (Inteligenca.nacinLokalno == true) {
-			vrednost_rdeci = oceni_rdec(igra).vrednost - 1;
-			vrednost_modri = oceni_moder(igra).vrednost - 1;	
+			vrednost_rdeci = oceni_rdec(igra).vrednost;
+			vrednost_modri = oceni_moder(igra).vrednost;	
 		}
 		else {
-			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size() - 1;
-			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size() - 1;
+			vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
+			vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
 		}
 //		vrednost_rdeci = BfsIskanje.BfsIskanjePotiRdec(igra).size();
 //		vrednost_modri = BfsIskanje.BfsIskanjePotiModer(igra).size();
