@@ -97,7 +97,7 @@ public class Inteligenca extends KdoIgra {
 			
 		
 			if (igra.naPotezi() == jaz) {
-				if (ocenaPoteze >= ocena) {
+				if (ocenaPoteze > ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
 					//najbolsePoteze.clear();
@@ -108,7 +108,7 @@ public class Inteligenca extends KdoIgra {
 			
 			else {
 
-				if (ocenaPoteze <= ocena) {
+				if (ocenaPoteze < ocena) {
 					ocena = ocenaPoteze;
 					najboljsaPoteza = p;
 					//najbolsePoteze.clear();

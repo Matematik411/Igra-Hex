@@ -146,21 +146,22 @@ public class IzbiraPotez {
 					return prazno;
 				}
 				
-				
-				seznam.add(new Koordinati(j, i - 1));
-				seznam.add(new Koordinati(j - 1, i + 1));
-				seznam.add(new Koordinati(j + 1, i - 1));
-				seznam.add(new Koordinati(j, i + 1));
-				
-				if (globina > 0) {
-					seznam.add(new Koordinati(j + 1, i));
-					seznam.add(new Koordinati(j - 1, i));
-				}
-				if (globina > 0) {
-					seznam.add(new Koordinati(j + 1, i - 2));
-					seznam.add(new Koordinati(j - 1, i + 2));
-					seznam.add(new Koordinati(j + 1, i + 1));
-					seznam.add(new Koordinati(j - 1, i - 1));
+				if (pot.size() > 2) {	
+					seznam.add(new Koordinati(j, i - 1));
+					seznam.add(new Koordinati(j - 1, i + 1));
+					seznam.add(new Koordinati(j + 1, i - 1));
+					seznam.add(new Koordinati(j, i + 1));
+					
+					if (globina > 0) {
+						seznam.add(new Koordinati(j + 1, i));
+						seznam.add(new Koordinati(j - 1, i));
+					}
+					if (globina > 0) {
+						seznam.add(new Koordinati(j + 1, i - 2));
+						seznam.add(new Koordinati(j - 1, i + 2));
+						seznam.add(new Koordinati(j + 1, i + 1));
+						seznam.add(new Koordinati(j - 1, i - 1));
+					}
 				}
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);
@@ -267,21 +268,22 @@ public class IzbiraPotez {
 				if (prazno.size() > 0) return prazno;
 				
 				
-				
-				seznam.add(new Koordinati(j + 1, i));
-				seznam.add(new Koordinati(j - 1, i + 1));
-				seznam.add(new Koordinati(j - 1, i));
-				seznam.add(new Koordinati(j + 1, i - 1));
-				
-				if (globina > 0) {
-				seznam.add(new Koordinati(j, i + 1));
-				seznam.add(new Koordinati(j, i - 1));
-				}
-				if (globina > 0) {
-					seznam.add(new Koordinati(j - 2, i + 1));
-					seznam.add(new Koordinati(j - 1, i - 1));
-					seznam.add(new Koordinati(j + 1, i + 1));
-					seznam.add(new Koordinati(j + 2, i - 1));
+				if (pot.size() > 2) {
+					seznam.add(new Koordinati(j + 1, i));
+					seznam.add(new Koordinati(j - 1, i + 1));
+					seznam.add(new Koordinati(j - 1, i));
+					seznam.add(new Koordinati(j + 1, i - 1));
+					
+					if (globina > 0) {
+					seznam.add(new Koordinati(j, i + 1));
+					seznam.add(new Koordinati(j, i - 1));
+					}
+					if (globina > 0) {
+						seznam.add(new Koordinati(j - 2, i + 1));
+						seznam.add(new Koordinati(j - 1, i - 1));
+						seznam.add(new Koordinati(j + 1, i + 1));
+						seznam.add(new Koordinati(j + 2, i - 1));
+					}	
 				}
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);
