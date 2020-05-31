@@ -36,27 +36,7 @@ public class BfsIskanje {
 	// Definiramo si veliko stevilo, ki bo pomenilo, da to te tocke ne moremo priti.
 	private final static int MAX = Integer.MAX_VALUE;
 	
-	public static int BfsOceni(Igra igra, Igralec jaz) {
-		int N = igra.velikost;
-		
-		int rdeca = BfsIskanjePotiRdec(igra).size();
-		int modra = BfsIskanjePotiModer(igra).size();
-		
-		int a = Integer.MAX_VALUE / (N * N);
-		int b = -a;
-	
-		if (jaz == Igralec.Rdec) {
-			return -(a * rdeca + b * modra );
-		}
-		else {
-			return (a * rdeca + b * modra );
-		}
-	}
-	
-	public static List<Koordinati> BfsIskanjePoti(Igra igra, Igralec jaz) {
-		if (jaz == Igralec.Rdec) return BfsIskanjePotiRdec(igra);
-		else return BfsIskanjePotiModer(igra);
-	}
+
 	
 	// Za vsako barvo je definirana svoja metoda, ki poisce in vrno najkrajso pot.
 	public static List<Koordinati> BfsIskanjePotiRdec(Igra igra) {

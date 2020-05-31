@@ -31,6 +31,14 @@ public class IzbiraPotez {
 				 if (plosca[i][j].polje == Polje.PRAZNO) prazne.add(koordinate);
 			} catch (ArrayIndexOutOfBoundsException e) {}
 		}
+		// ~~~~~~~~~~~~ DODANOOOOOOOOOO---------------
+//		for (Koordinati p : BfsIskanje.BfsIskanjePotiModer(igra)) {
+//			if (!prazne.contains(p)) prazne.add(p);
+//		}
+//		for (Koordinati p : BfsIskanje.BfsIskanjePotiRdec(igra)) {
+//			if (!prazne.contains(p)) prazne.add(p);
+//		}
+
 
 		return prazne;
 	}
@@ -51,8 +59,14 @@ public class IzbiraPotez {
 			else {
 				pot = potOcena.najbolsa_pot;
 			}
-
-			if (pot.size() == 0) {
+			
+			//  ~~~~~~~~~~~~ DODANO ------------------------
+			List<Koordinati> test = new LinkedList<Koordinati>();
+			for (Vrednost vre : pot) {
+				test.add(vre.koordinati);
+			}
+			
+			if (preveriPrazno(igra, test).size() < 4) {
 				potOcena.vrednost = 1;
 				Inteligenca.nacinLokalno = false;
 				List<Koordinati> modra_pot = BfsIskanje.BfsIskanjePotiModer(igra);
@@ -155,7 +169,11 @@ public class IzbiraPotez {
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);
 				}
-
+				
+				// ~~~~~~~~~~~DODAAAAANOOOOOOOOOOO----------------------
+				for (Koordinati p : BfsIskanje.BfsIskanjePotiRdec(igra)) {
+					seznam.add(p);
+				}
 
 				return preveriPrazno(igra, seznam);
 			}
@@ -171,8 +189,13 @@ public class IzbiraPotez {
 			else {
 				pot = potOcena.najbolsa_pot;
 			}
+			// ~~~~~~~~~~~~~~~ DODANO --------------
+			List<Koordinati> test = new LinkedList<Koordinati>();
+			for (Vrednost vre : pot) {
+				test.add(vre.koordinati);
+			}
 
-			if (pot.size() == 0) {
+			if (preveriPrazno(igra,test).size() < 4) {
 				potOcena.vrednost = 1;
 				Inteligenca.nacinLokalno = false;
 				List<Koordinati> rdeca_pot = BfsIskanje.BfsIskanjePotiRdec(igra);
@@ -273,6 +296,10 @@ public class IzbiraPotez {
 				}
 				for (Vrednost vre : pot) {
 					seznam.add(vre.koordinati);
+				}
+				// ~~~~~~~~~~~DODAAAAANOOOOOOOOOOO----------------------
+				for (Koordinati p : BfsIskanje.BfsIskanjePotiModer(igra)) {
+					seznam.add(p);
 				}
 				
 				return preveriPrazno(igra, seznam);

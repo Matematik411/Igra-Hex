@@ -18,7 +18,7 @@ public class Inteligenca extends KdoIgra {
 	
 	public Inteligenca() {
 		super("ZajcMaier");
-		this.glob = 6;
+		this.glob = 5;
 		this.nacinGlobalno = true;
 	}
 	
