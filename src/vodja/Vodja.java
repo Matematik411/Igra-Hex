@@ -1,6 +1,6 @@
 package vodja;
 /*
- * Ta datoteka upravlja potek igre.
+ * Ta razred upravlja potek igre.
  * 
  * Vsako potezo torej klice ustreznega igralca, prav tako ob koncu konca igro.
  */

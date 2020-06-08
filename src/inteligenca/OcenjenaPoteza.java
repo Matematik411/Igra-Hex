@@ -1,4 +1,11 @@
 package inteligenca;
+/*
+ * Ta razred uporablja algoritem minimax.
+ * 
+ * Vsak objekt vsebuje številsko vrednost oceno in koordinate, ki jim ta ocena pripada.
+ * Glede na oceno, se nato algoritem odloèi, katere koordinate naj izbere za naslednjo
+ * potezo.
+ */
 
 import splosno.Koordinati;
 

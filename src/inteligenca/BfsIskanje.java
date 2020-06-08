@@ -20,7 +20,6 @@ import logika.Queue;
 import logika.Tocka;
 import splosno.Koordinati;
 import logika.Igra;
-import logika.Igralec;
 import logika.Polje;
 
 public class BfsIskanje {

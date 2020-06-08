@@ -158,7 +158,16 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	}
 	
 	// V tem nizu je zapisan izpis, ki ga uporabnik vidi, ce zeli prebrati vec o igri.
-	String opisIgre = "Igra Hex je zelo zanimiva in pouèna igra, ki veliko nauèi igralca!";
+	String opisIgre = "Igra Hex je aplikacija za namizno igro Hex.\n"
+			+ "Aplikacija je bila izdelana kot projekt pri predmetu Programiranje 2 v študijskem letu 2019/2020 pod mentorstvom\n"
+			+ "prof. dr. Alexa Simpsona in asist. dr. Matjaža Zaveršnika. Izdelala sva jo Andraž Maier in Nejc Zajc.\n"
+			+ "Igra Hex izvira iz sredine prejšnjega stoletja, namenjena pa je dvema igralcema. Rdeèi in modri igralec poskušata\n"
+			+ "z izmeniènim polaganjem žetonov svoje barve ustvariti pot èez mrežo šestkotnikov. Zmaga igralec, ki mu to tudi uspe.\n"
+			+ "Igra se navadno igra na mreži velikosti 11x11, najina aplikacija pa poleg te možnosti ponuja tudi igro na treh drugih\n"
+			+ "velikostih. Uporabnik lahko igra igro proti raèunalniku, ki je implementiran s pomoèjo algoritma Minimax, lahko opazuje\n"
+			+ "igro dveh verzij raèunalnika ali pa igra proti drugemu uporabniku. Pri igri med dvema uporabnikoma sta na voljo tudi\n"
+			+ "gumba za razveljavitev poteze in spremembo barve, ki se lahko uporabi le po prvi potezi.\n"
+			+ "Uporabnik igro zaène z izbiro v meniju 'nova igra', igra pa jo s klikom miške v izbrano polje mreže.";
 	
 	
 	// Zdaj je definiran osnovni izgled okna. 
@@ -261,7 +270,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 				break;
 			// Ob koncu igre izpisemo zmagovalca.
 			case ZMAGA_RDEC: 
-				status.setText("Zmagovalec je RDECI igralec, torej " + 
+				status.setText("Zmagovalec je RDEÈI igralec, torej " + 
 						Vodja.kdoIgra.get(Vodja.igra.naPotezi().nasprotnik()).ime());
 				break;
 			case ZMAGA_MODER: 

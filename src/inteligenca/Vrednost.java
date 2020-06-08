@@ -1,4 +1,11 @@
 package inteligenca;
+/*
+ * Objekte razreda Vrednost uporabljamo za dinamicno iskanje najkrajsih poti v OceniPozicijo.
+ * V sebi skriva koordinate polja, koliko zetonov je potrebnih, da pridemo od tega polja do konca,
+ * pointer, ki nam pove iz katerega zetona smo prisli (to je zato, da lahko potem skonstruiramo najbolso pot)
+ * in objekt razreda Skok, ki nam pove ali je nas prejsnji zeton na poti oddaljen za 2 polji, a nam nasprotnik ne more 
+ * blokirati poti do njega.
+ */
 
 import splosno.Koordinati;
 

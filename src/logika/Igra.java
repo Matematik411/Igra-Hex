@@ -1,6 +1,6 @@
 package logika;
 /*
- * Paket, ki ustvari igro in vsebuje metode, za njeno igranje.
+ * Razred, ki ustvari igro in vsebuje metode, za njeno igranje.
  * 
  * Tu se ne ve, kdo igra igro (clovek ali racunalnik), igra tece z izvajanjem potez in
  * usklajevanjem njenih lastnosti na vsaki potezi.
@@ -17,6 +17,7 @@ public class Igra {
 	
 	// Napovedane spremeljivke, ki jih uporablja igra.
 	// Standardna velikost igralne plošèe je 11x11.
+	// (Dve spremenljivki obstajata, saj se klièeta tako statièno, kot ne.)
 	public static int N = 11;
 	public int velikost;
 
