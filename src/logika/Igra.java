@@ -16,10 +16,8 @@ import splosno.Koordinati;
 public class Igra {
 	
 	// Napovedane spremeljivke, ki jih uporablja igra.
-	// Standardna velikost igralne plošèe je 11x11.
-	// (Dve spremenljivki obstajata, saj se klièeta tako statièno, kot ne.)
+	// Standardna velikost igralne plosce je 11x11.
 	public static int N = 11;
-	public int velikost;
 
 	// Igralno polje je mreza.
 	private Tocka[][] plosca;
@@ -52,7 +50,6 @@ public class Igra {
 	
 	// Konstruktor za igro MxM.
 	public Igra(int M) {
-		this.velikost = M;
 		this.plosca = new Tocka[M][M];
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < M; j++) {
@@ -75,7 +72,6 @@ public class Igra {
 	// Konstruktor za kopijo igre, ki je nujen za simuliranje novih iger, pri 
 	// igranju racunalnika.
 	public Igra(Igra igra) {
-		this.velikost = igra.velikost;
 		this.naPotezi = igra.naPotezi();
 		this.konec = new HashSet<Tocka>();
 		this.rdece = new HashSet<Tocka>();

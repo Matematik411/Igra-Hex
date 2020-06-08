@@ -310,7 +310,7 @@ public class OceniPozicijo {
 	// Funkcija vrne oceno pozicije za minimax, tako da pretvori vrednost, ki pomeni, koliko potez
 	// ima do konca igralec, v neko stevilo za minimax.
 	public static int oceniPozicijo(Igra igra, Igralec jaz, int globina) {
-		int N = igra.velikost;
+		int N = Igra.N;
 		int vrednost_rdeci;
 		int vrednost_modri;
 

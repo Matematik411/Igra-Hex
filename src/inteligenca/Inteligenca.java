@@ -25,7 +25,7 @@ public class Inteligenca extends KdoIgra {
 	public static boolean nacinGlobalno = true;
 	
 	public Inteligenca() {
-		super("ZajcMaier");
+		super("Rehoboam");
 		Inteligenca.globina = 5;
 
 	}
@@ -42,7 +42,7 @@ public class Inteligenca extends KdoIgra {
 	public static OcenjenaPoteza alphaBetaMinimax(Igra igra, int globina, int alpha, int beta, Igralec jaz) {
 		// Ce je raCunalnik prvi na potezi postavi svoj zeton v sredino.
 		if (igra.zadnja == null) {
-			return new OcenjenaPoteza(new Koordinati(igra.velikost / 2, igra.velikost / 2), 0);
+			return new OcenjenaPoteza(new Koordinati(Igra.N / 2, Igra.N / 2), 0);
 		}
 		
 		int ocena;

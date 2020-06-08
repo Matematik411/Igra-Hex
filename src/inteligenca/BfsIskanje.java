@@ -44,7 +44,7 @@ public class BfsIskanje {
 				
 		// Nato zapolnimo slovarja globin in predhodnih tock, glede na zacetek v 
 		// rdeci tocki pod mrezo.
-		BFSGlobine(new Tocka(new Koordinati(0, igra.velikost), Polje.Rdec), plosca);
+		BFSGlobine(new Tocka(new Koordinati(0, Igra.N), Polje.Rdec), plosca);
 		
 		// Zdaj se sprehodimo cez zgornjo vrstico in poiscemo, do katerega iz teh polj
 		// lahko pridemo z najmanj potezami.
@@ -54,7 +54,7 @@ public class BfsIskanje {
 		Koordinati polozaj = plosca[0][0].koordinati; 
 		int dolzina = MAX;
 		
-		for (int j = 0; j < igra.velikost; j++) {
+		for (int j = 0; j < Igra.N; j++) {
 			// Iz slovarja preberemo globino tocke (ce ta ne obstaja priredimo vrednost MAX).
 			int novaDolzina = globine.getOrDefault(plosca[0][j].koordinati, MAX);
 			// Ce je dobljena globina boljsa od trenutne, zamenjamo polozaj s to tocko.
@@ -82,12 +82,12 @@ public class BfsIskanje {
 	public static List<Koordinati> BfsIskanjePotiModer(Igra igra) {
 		Tocka[][] plosca = igra.getPlosca();
 
-		BFSGlobine(new Tocka(new Koordinati(igra.velikost, 0), Polje.Moder), plosca);
+		BFSGlobine(new Tocka(new Koordinati(Igra.N, 0), Polje.Moder), plosca);
 		
 		Koordinati polozaj = plosca[0][0].koordinati; 
 		int dolzina = MAX;
 		
-		for (int i = 0; i < igra.velikost; i++) {
+		for (int i = 0; i < Igra.N; i++) {
 			int novaDolzina = globine.getOrDefault(plosca[i][0].koordinati, MAX);
 			if (novaDolzina < dolzina) {
 				dolzina = novaDolzina;
